@@ -1,1 +1,87 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MAJESTIC7 | Admin Login</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090806;color:#f4d58c;font-family:Arial,sans-serif;padding:20px}
+main{max-width:420px;margin:70px auto;background:#17130d;border:1px solid #8a682f;border-radius:16px;padding:25px}
+h1{text-align:center;letter-spacing:4px}
+p{color:#c9b58e;line-height:1.5;font-size:14px}
+input{width:100%;padding:14px;margin:10px 0;background:#090806;color:white;border:1px solid #70552c;border-radius:8px}
+button{width:100%;padding:14px;background:#e8c477;border:0;border-radius:8px;font-weight:bold;margin-top:12px}
+#status{overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<h1>MAJESTIC7</h1>
+<p style="text-align:center">SECURE ACCOUNT LOGIN</p>
+
+<input id="email" type="email" placeholder="Email address">
+<input id="password" type="password" placeholder="Password">
+
+<button id="login">SIGN IN</button>
+<button id="logout" hidden>SIGN OUT</button>
+
+<p id="status">Please sign in with your Firebase account.</p>
+<p>Authentication does not automatically grant administrator privileges. Chip allocation remains disabled until trusted server authorization is implemented.</p>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDRB9MMiWSSJHg1Q2650JBJ1j-fSz9bF2o",
+  authDomain: "majestic7-bca40.firebaseapp.com",
+  databaseURL: "https://majestic7-bca40-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "majestic7-bca40",
+  storageBucket: "majestic7-bca40.firebasestorage.app",
+  messagingSenderId: "690737902698",
+  appId: "1:690737902698:web:fd69ae2d5bc6520f3b4613"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+const status = document.getElementById("status");
+const login = document.getElementById("login");
+const logout = document.getElementById("logout");
+
+login.onclick = async () => {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  if (!email || !password) {
+    status.textContent = "Enter your email and password.";
+    return;
+  }
+
+  status.textContent = "Signing in...";
+  try {
+    await auth.signInWithEmailAndPassword(email, password);
+  } catch (error) {
+    status.textContent = error.message;
+  }
+};
+
+logout.onclick = () => auth.signOut();
+
+auth.onAuthStateChanged(user => {
+  if (user) {
+    status.textContent = "Signed in. Account UID: " + user.uid +
+      ". Admin access has not been granted.";
+    login.hidden = true;
+    logout.hidden = false;
+  } else {
+    status.textContent = "Please sign in with your Firebase account.";
+    login.hidden = false;
+    logout.hidden = true;
+  }
+});
+</script>
+</body>
+</html>
