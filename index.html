@@ -314,6 +314,7 @@ let room = "";
 
 const suits = ["♠", "♥", "♦", "♣"];
 const ranks = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+
 function savePlayer() {
   const username = document.getElementById("username").value.trim();
 
@@ -321,13 +322,52 @@ function savePlayer() {
     alert("Username must contain at least 3 characters.");
     return;
   }
+
+  localStorage.setItem("m7_username", username);
+
+  if (!localStorage.getItem("m7_player_id")) {
+    localStorage.setItem(
+      "m7_player_id",
+      "M7-" + Math.floor(100000 + Math.random() * 900000)
+    );
+  }
+
+  document.getElementById("playerName").textContent =
+    username.toUpperCase();
+
+  document.getElementById("playerId").textContent =
+    localStorage.getItem("m7_player_id");
+
+  alert("ROYAL PROFILE SAVED SUCCESSFULLY!");
+}
+
+function loadPlayer() {
+  const savedUsername = localStorage.getItem("m7_username");
+
+  if (savedUsername) {
+    document.getElementById("username").value = savedUsername;
+    document.getElementById("playerName").textContent =
+      savedUsername.toUpperCase();
+  }
+
+  if (localStorage.getItem("m7_chips") === null) {
+    localStorage.setItem("m7_chips", "0");
+  }
+
+  document.getElementById("chipBalance").textContent =
+    Number(localStorage.getItem("m7_chips")).toLocaleString("en-IN");
+
+  document.getElementById("playerId").textContent =
+    localStorage.getItem("m7_player_id") || "M7-0001";
+}
+
 function adminAddChips() {
   const playerId = document.getElementById("adminPlayerId").value.trim();
   const amount = Number(document.getElementById("adminChipAmount").value);
   const currentId = localStorage.getItem("m7_player_id");
 
-  if (playerId !== currentId) {
-    alert("Player ID not found on this device.");
+  if (!currentId || playerId !== currentId) {
+    alert("Player ID not found. Save your profile first.");
     return;
   }
 
@@ -337,46 +377,27 @@ function adminAddChips() {
   }
 
   const balance = Number(localStorage.getItem("m7_chips") || 0);
+
+  if (balance + amount > 10000000) {
+    alert("Maximum balance is 1 crore chips.");
+    return;
+  }
+
   const newBalance = balance + amount;
 
   localStorage.setItem("m7_chips", String(newBalance));
+
   document.getElementById("chipBalance").textContent =
     newBalance.toLocaleString("en-IN");
 
   document.getElementById("adminMessage").textContent =
     "CHIPS ADDED SUCCESSFULLY!";
-}
-  localStorage.setItem("m7_username", username);
-if (!localStorage.getItem("m7_player_id")) {
-  localStorage.setItem(
-    "m7_player_id",
-    "M7-" + Math.floor(100000 + Math.random() * 900000)
-  );
-}
-  document.getElementById("playerName").textContent =
-    username.toUpperCase();
 
-  alert("ROYAL PROFILE SAVED SUCCESSFULLY!");
-  }function loadPlayer() {
-  const savedUsername = localStorage.getItem("m7_username");
-
-  if (savedUsername) {
-    document.getElementById("username").value = savedUsername;
-    document.getElementById("playerName").textContent =
-      savedUsername.toUpperCase();
-  }
-}document.getElementById("playerId").textContent =
-      localStorage.getItem("m7_player_id") || "M7-0001";
+  document.getElementById("adminChipAmount").value = "";
+}
 
 loadPlayer();
-function startGame(name) {
-  currentGame = name;
-  document.getElementById("gameName").textContent = name;
-  document.getElementById("play").classList.remove("hidden");
-  document.getElementById("play").scrollIntoView({behavior:"smooth"});
-  document.getElementById("status").textContent =
-    "Welcome to " + name + "! Press DEAL to begin.";
-}
+  
 
 function createDeck() {
   deck = [];
