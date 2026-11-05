@@ -302,7 +302,12 @@ function savePlayer() {
   }
 
   localStorage.setItem("m7_username", username);
-
+if (!localStorage.getItem("m7_player_id")) {
+  localStorage.setItem(
+    "m7_player_id",
+    "M7-" + Math.floor(100000 + Math.random() * 900000)
+  );
+}
   document.getElementById("playerName").textContent =
     username.toUpperCase();
 
