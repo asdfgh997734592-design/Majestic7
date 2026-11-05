@@ -3,168 +3,416 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08060b">
 <title>MAJESTIC7 | Royal Gaming Universe</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+
 :root{
---gold:#ffd45a;
---gold2:#ff9f00;
---red:#c8172b;
---black:#070707;
---panel:#15120e;
---text:#fff4d0;
+ --gold:#f9d477;
+ --gold2:#ffad32;
+ --red:#d71938;
+ --bg:#08060b;
+ --panel:#15111a;
+ --muted:#a49aa9;
 }
-*{box-sizing:border-box}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
 body{
-margin:0;
-background:radial-gradient(circle at top,#292014,#070707 65%);
-color:var(--text);
-font-family:Arial,sans-serif;
+ background:
+ radial-gradient(ellipse at 50% -20%,#49300d 0%,transparent 45%),
+ radial-gradient(circle at 90% 40%,#25102d 0%,transparent 35%),
+ var(--bg);
+ color:white;
+ font-family:'Rajdhani',sans-serif;
+ min-height:100vh;
+ overflow-x:hidden;
 }
+
+body:before{
+ content:"";
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ opacity:.13;
+ background-image:linear-gradient(#ffffff0c 1px,transparent 1px),
+ linear-gradient(90deg,#ffffff0c 1px,transparent 1px);
+ background-size:45px 45px;
+ mask-image:linear-gradient(to bottom,black,transparent);
+}
+
 header{
-padding:18px;
-text-align:center;
-border-bottom:1px solid #8d6927;
-background:#080706;
+ height:75px;
+ padding:0 5%;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ border-bottom:1px solid #d7a94a35;
+ background:#09070de8;
+ backdrop-filter:blur(20px);
+ position:sticky;
+ top:0;
+ z-index:10;
 }
+
 .logo{
-font-size:32px;
-font-weight:1000;
-letter-spacing:4px;
-color:var(--gold);
-text-shadow:0 0 15px #c98b16;
+ font-family:Orbitron;
+ font-size:23px;
+ font-weight:900;
+ letter-spacing:2px;
+ color:var(--gold);
+ text-shadow:0 0 20px #ffb52b70;
 }
-header p{color:#c8a75e;margin:5px}
-nav{
-display:flex;gap:8px;justify-content:center;
-flex-wrap:wrap;padding:12px;
-background:#100e0b;
+
+.logo span{color:white}
+
+.nav{
+ display:flex;
+ align-items:center;
+ gap:20px;
 }
-button{
-background:linear-gradient(135deg,#ffd45a,#b77a13);
-border:1px solid #ffe59b;
-border-radius:8px;
-padding:11px 16px;
-font-weight:bold;
-color:#180f00;
-cursor:pointer;
+
+.nav a{
+ color:#c9bdcc;
+ text-decoration:none;
+ font-size:15px;
+ font-weight:700;
+ cursor:pointer;
 }
-button:hover{filter:brightness(1.2)}
-button.secondary{
-background:#211a10;color:var(--gold);
-border:1px solid #9c742c;
+
+.nav a:hover{color:var(--gold)}
+
+.wallet{
+ border:1px solid #d6ae55;
+ border-radius:30px;
+ padding:8px 15px;
+ color:var(--gold);
+ font-weight:700;
+ background:#f7c75d12;
 }
-button.danger{background:#8b1421;color:white}
-main{max-width:1100px;margin:auto;padding:15px}
-.panel{
-background:linear-gradient(145deg,#1b1711,#0d0c0b);
-border:1px solid #806027;
-border-radius:13px;
-padding:17px;margin-bottom:16px;
-box-shadow:0 5px 22px #000;
+
+.hero{
+ text-align:center;
+ padding:55px 15px 35px;
+ position:relative;
 }
-h2{color:var(--gold);margin-top:0}
-h3{color:#e9c46a}
-.hidden{display:none!important}
-.profile{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
+
+.crown{
+ font-size:45px;
+ filter:drop-shadow(0 0 20px #ffc84b);
+ animation:float 3s ease-in-out infinite;
 }
-.stat{
-padding:15px;
-background:#090807;
-border:1px solid #70531f;
-border-radius:9px;
+
+@keyframes float{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-10px)}
 }
-.stat small{color:#bca46c}
-.stat strong{
-display:block;
-font-size:23px;
-color:var(--gold);
-margin-top:7px;
-overflow-wrap:anywhere;
+
+.hero h1{
+ font-family:Orbitron;
+ font-size:clamp(30px,7vw,65px);
+ font-weight:900;
+ letter-spacing:3px;
+ background:linear-gradient(120deg,#fff3c0,#e6a72c,#fff,#ad6811);
+ background-size:200%;
+ -webkit-background-clip:text;
+ color:transparent;
+ animation:shine 5s linear infinite;
 }
-input,select{
-width:100%;padding:12px;
-border-radius:7px;
-background:#090807;
-border:1px solid #886529;
-color:white;
-margin:7px 0 12px;
+
+@keyframes shine{to{background-position:200%}}
+
+.hero p{
+ color:#c0b3c4;
+ font-size:18px;
+ letter-spacing:2px;
+ margin-top:12px;
 }
-label{color:#e4c57c}
+
+.hero-line{
+ width:130px;
+ height:2px;
+ background:linear-gradient(90deg,transparent,var(--gold),transparent);
+ margin:20px auto;
+}
+
+.section{
+ max-width:1200px;
+ margin:auto;
+ padding:20px 18px;
+}
+
+.section-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:20px;
+}
+
+.section-head h2{
+ font-family:Orbitron;
+ font-size:19px;
+ letter-spacing:2px;
+ color:var(--gold);
+}
+
+.section-head span{
+ font-size:13px;
+ color:var(--muted);
+}
+
+.featured{
+ display:grid;
+ grid-template-columns:1.4fr 1fr;
+ gap:18px;
+ margin-bottom:30px;
+}
+
+.feature{
+ min-height:205px;
+ position:relative;
+ overflow:hidden;
+ border:1px solid #d7aa504a;
+ border-radius:18px;
+ padding:25px;
+ background:
+ radial-gradient(circle at 85% 50%,#7c431b80,transparent 40%),
+ linear-gradient(125deg,#281b18,#120e19);
+ box-shadow:0 15px 45px #0008;
+ transition:.4s;
+}
+
+.feature:hover{
+ transform:perspective(800px) rotateY(-3deg) translateY(-5px);
+ border-color:var(--gold);
+}
+
+.feature h3{
+ font-family:Orbitron;
+ color:var(--gold);
+ font-size:21px;
+ margin:12px 0;
+}
+
+.feature p{
+ color:#c3b6c3;
+ font-size:16px;
+}
+
+.feature .big{
+ position:absolute;
+ right:20px;
+ bottom:0;
+ font-size:100px;
+ filter:drop-shadow(0 0 18px #ffbf4b80);
+}
+
+.btn{
+ display:inline-block;
+ border:0;
+ border-radius:7px;
+ padding:11px 22px;
+ margin-top:18px;
+ background:linear-gradient(120deg,#ffdf91,#bc7a17);
+ color:#160e06;
+ font-family:Orbitron;
+ font-weight:800;
+ font-size:11px;
+ cursor:pointer;
+ box-shadow:0 0 18px #ffbf4b30;
+ transition:.3s;
+}
+
+.btn:hover{
+ transform:scale(1.06);
+ box-shadow:0 0 25px #ffc34b80;
+}
+
 .game-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px;
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:17px;
 }
+
 .game{
-background:linear-gradient(145deg,#21180c,#100e0b);
-border:1px solid #9b712c;
-padding:17px 10px;
-text-align:center;
-border-radius:12px;
-cursor:pointer;
+ min-height:185px;
+ position:relative;
+ overflow:hidden;
+ border-radius:15px;
+ border:1px solid #ffffff18;
+ background:linear-gradient(145deg,#211b29,#100d15);
+ padding:20px;
+ transition:.35s;
+ cursor:pointer;
 }
-.game:active{transform:scale(.97)}
-.game .emoji{font-size:35px}
-.game h3{font-size:14px}
-.game p{font-size:11px;color:#bca46c}
-.room{
-border:1px solid #654b21;
-padding:12px;border-radius:8px;margin:10px 0;
+
+.game:hover{
+ transform:translateY(-7px);
+ border-color:#e4b84c;
+ box-shadow:0 12px 35px #c48a2430;
 }
-#table{
-background:radial-gradient(ellipse,#17603a,#06321e);
-border:5px solid #bd8d32;
-border-radius:50%;
-min-height:310px;
-padding:20px;
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-align-items:center;
-text-align:center;
+
+.game:after{
+ content:"";
+ position:absolute;
+ width:150px;
+ height:150px;
+ border-radius:50%;
+ right:-50px;
+ top:-50px;
+ background:#d99c3020;
+ filter:blur(30px);
 }
-.seat{
-background:#08150e;
-border:1px solid #d4aa4b;
-border-radius:9px;
-padding:12px 4px;
-font-size:12px;
+
+.game-icon{
+ font-size:48px;
+ margin-bottom:12px;
+ filter:drop-shadow(0 0 12px #ffc34b50);
 }
-.avatar{font-size:25px}
-#cards{
-display:flex;gap:7px;flex-wrap:wrap;
-justify-content:center;margin:18px 0;
+
+.game h3{
+ font-family:Orbitron;
+ font-size:15px;
+ color:#f7d27c;
+ margin-bottom:6px;
 }
-.playcard{
-background:#fff;
-color:#111;
-padding:13px 9px;
-border-radius:6px;
-font-size:20px;
-border:1px solid #bbb;
-min-width:40px;
+
+.game p{
+ color:#aaa0b1;
+ font-size:14px;
 }
-.redcard{color:#d00}
-footer{text-align:center;padding:20px;color:#a78a50}
-@media(min-width:650px){
-.game-grid{grid-template-columns:repeat(4,1fr)}
+
+.game small{
+ display:inline-block;
+ margin-top:12px;
+ color:#b8a6bd;
+ border:1px solid #ffffff25;
+ padding:4px 9px;
+ border-radius:20px;
+ font-size:11px;
 }
-@media(max-width:400px){
-.profile{grid-template-columns:1fr}
-.logo{font-size:25px}
-button{padding:10px}
+
+.game button{
+ position:relative;
+ z-index:2;
 }
-@media(orientation:landscape) and (max-height:500px){
-header{padding:5px}
-header p{display:none}
-main{padding:7px}
-.panel{padding:10px;margin-bottom:8px}
-#table{min-height:220px}
+
+.stats{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:12px;
+ margin:25px 0;
+}
+
+.stat{
+ text-align:center;
+ padding:18px 8px;
+ background:#ffffff08;
+ border:1px solid #d3a74b30;
+ border-radius:12px;
+}
+
+.stat strong{
+ display:block;
+ color:var(--gold);
+ font-family:Orbitron;
+ font-size:19px;
+}
+
+.stat span{
+ color:#a99eae;
+ font-size:13px;
+}
+
+.notice{
+ margin:25px 0;
+ border:1px solid #d7aa5040;
+ padding:17px;
+ border-radius:12px;
+ background:#d7aa500a;
+ color:#c4b8c5;
+ font-size:14px;
+ text-align:center;
+}
+
+footer{
+ text-align:center;
+ border-top:1px solid #d7aa5030;
+ padding:30px 15px;
+ color:#827988;
+ font-size:13px;
+}
+
+footer strong{color:var(--gold)}
+
+.modal{
+ display:none;
+ position:fixed;
+ inset:0;
+ z-index:30;
+ background:#000d;
+ backdrop-filter:blur(12px);
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+}
+
+.modal-box{
+ width:100%;
+ max-width:400px;
+ background:linear-gradient(145deg,#251b29,#0e0a12);
+ border:1px solid var(--gold);
+ border-radius:18px;
+ padding:30px;
+ text-align:center;
+ box-shadow:0 0 60px #dca33b35;
+}
+
+.modal-box h2{
+ color:var(--gold);
+ font-family:Orbitron;
+ font-size:20px;
+ margin-bottom:15px;
+}
+
+.modal-box p{
+ color:#c2b7c7;
+ font-size:16px;
+ line-height:1.5;
+}
+
+.close{
+ background:transparent;
+ color:white;
+ border:1px solid #ffffff40;
+ padding:9px 20px;
+ border-radius:6px;
+ margin-top:20px;
+ cursor:pointer;
+}
+
+@media(max-width:750px){
+ header{height:65px;padding:0 14px}
+ .logo{font-size:17px}
+ .nav{gap:10px}
+ .nav a{font-size:12px}
+ .wallet{font-size:12px;padding:7px 10px}
+ .hero{padding-top:38px}
+ .featured{grid-template-columns:1fr}
+ .feature{min-height:175px}
+ .game-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+ .game{padding:15px;min-height:175px}
+ .game-icon{font-size:38px}
+ .game h3{font-size:12px}
+ .section-head h2{font-size:15px}
+}
+
+@media(max-width:370px){
+ .game-grid{grid-template-columns:1fr}
+ .nav a{display:none}
 }
 </style>
 </head>
@@ -172,329 +420,156 @@ main{padding:7px}
 <body>
 
 <header>
-<div class="logo">♛ MAJESTIC7 ♛</div>
-<p>THE ROYAL GAMING UNIVERSE</p>
+ <div class="logo">👑 MAJESTIC<span>7</span></div>
+ <nav class="nav">
+  <a href="#games">GAMES</a>
+  <a href="#about">ABOUT</a>
+  <div class="wallet">🪙 1 CR</div>
+ </nav>
 </header>
 
-<nav>
-<button onclick="showSection('home')">HOME</button>
-<button onclick="showSection('games')">GAMES</button>
-<button onclick="showSection('rooms')">PRIVATE ROOMS</button>
-<button onclick="showSection('admin')">ADMIN</button>
-</nav>
-
-<main>
-
-<!-- PLAYER PROFILE -->
-<section class="panel" id="profile">
-<h2>👑 PLAYER PROFILE</h2>
-<div class="profile">
-<div class="stat">
-<small>PLAYER NAME</small>
-<strong id="playerName">ROYAL PLAYER</strong>
-</div>
-<div class="stat">
-<small>PLAYER ID</small>
-<strong id="playerID">M7-0001</strong>
-</div>
-<div class="stat">
-<small>VIRTUAL CHIP BALANCE</small>
-<strong id="chipBalance">10,000</strong>
-</div>
-<div class="stat">
-<small>PLAYER STATUS</small>
-<strong>ROYAL MEMBER</strong>
-</div>
-</div>
+<section class="hero">
+ <div class="crown">👑</div>
+ <h1>ENTER THE ROYAL ARENA</h1>
+ <p>ONE UNIVERSE. INFINITE ENTERTAINMENT.</p>
+ <div class="hero-line"></div>
 </section>
 
-<!-- HOME -->
-<section id="home" class="panel">
-<h2>WELCOME TO MAJESTIC7</h2>
-<p>Enter the Royal Gaming Universe.</p>
-<button onclick="showSection('games')">EXPLORE GAMES ♛</button>
-</section>
+<main class="section">
 
-<!-- GAMES -->
-<section id="games" class="panel hidden">
-<h2>♛ ROYAL GAME COLLECTION</h2>
-<div class="game-grid">
+ <div class="section-head">
+  <h2>ROYAL SPOTLIGHT</h2>
+  <span>EXCLUSIVE ARENA</span>
+ </div>
 
-<div class="game" onclick="openGame('Indian 13-Card Rummy')">
-<div class="emoji">🂡</div>
-<h3>INDIAN 13-CARD RUMMY</h3>
-<p>13 Card Classic</p>
-</div>
+ <div class="featured">
 
-<div class="game" onclick="openGame('Points Rummy')">
-<div class="emoji">🃏</div>
-<h3>POINTS RUMMY</h3>
-<p>Classic Points</p>
-</div>
+  <div class="feature">
+   <div>♠ PRIVATE TABLES</div>
+   <h3>TEEN PATTI ROYALE</h3>
+   <p>Invite friends. Create your private table. Enjoy the royal experience.</p>
+   <button class="btn" onclick="openGame('Teen Patti Royale')">ENTER ARENA →</button>
+   <div class="big">🃏</div>
+  </div>
 
-<div class="game" onclick="openGame('Pool 101')">
-<div class="emoji">♠️</div>
-<h3>POOL 101</h3>
-<p>101 Points</p>
-</div>
+  <div class="feature">
+   <div>♦ CLASSIC CARD ARENA</div>
+   <h3>INDIAN RUMMY</h3>
+   <p>13-card Rummy. Classic gameplay. Royal atmosphere.</p>
+   <button class="btn" onclick="openGame('Indian Rummy')">PLAY NOW →</button>
+   <div class="big">🎴</div>
+  </div>
 
-<div class="game" onclick="openGame('Pool 201')">
-<div class="emoji">♥️</div>
-<h3>POOL 201</h3>
-<p>201 Points</p>
-</div>
+ </div>
 
-<div class="game" onclick="openGame('Deals Rummy')">
-<div class="emoji">♦️</div>
-<h3>DEALS RUMMY</h3>
-<p>Deal-based Rummy</p>
-</div>
+ <div class="section-head" id="games">
+  <h2>THE GAME COLLECTION</h2>
+  <span>CHOOSE YOUR GAME</span>
+ </div>
 
-<div class="game" onclick="openGame('Teen Patti')">
-<div class="emoji">👑</div>
-<h3>TEEN PATTI</h3>
-<p>Three Card</p>
-</div>
+ <div class="game-grid">
 
-<div class="game" onclick="openGame('29')">
-<div class="emoji">♣️</div>
-<h3>29</h3>
-<p>Twenty Nine</p>
-</div>
+  <div class="game">
+   <div class="game-icon">🃏</div>
+   <h3>TEEN PATTI</h3>
+   <p>Classic three-card experience.</p>
+   <small>PRIVATE TABLES</small>
+   <button class="btn" onclick="openGame('Teen Patti')">OPEN GAME →</button>
+  </div>
 
-<div class="game" onclick="openGame('Poker')">
-<div class="emoji">🎴</div>
-<h3>POKER</h3>
-<p>Royal Poker</p>
-</div>
+  <div class="game">
+   <div class="game-icon">🎴</div>
+   <h3>INDIAN RUMMY</h3>
+   <p>Indian 13-card Rummy.</p>
+   <small>CLASSIC MODE</small>
+   <button class="btn" onclick="openGame('Indian Rummy')">OPEN GAME →</button>
+  </div>
 
-</div>
-</section>
+  <div class="game">
+   <div class="game-icon">♠️</div>
+   <h3>POKER ROOM</h3>
+   <p>Strategic card entertainment.</p>
+   <small>COMING SOON</small>
+   <button class="btn" onclick="openGame('Poker Room')">EXPLORE →</button>
+  </div>
 
-<!-- PRIVATE ROOMS -->
-<section id="rooms" class="panel hidden">
-<h2>🏰 PRIVATE ROOMS</h2>
-<p>Create a private six-player demo room.</p>
-<input id="roomName" placeholder="Enter room name">
-<button onclick="createRoom()">CREATE ROOM</button>
-<div id="roomList"></div>
-</section>
+  <div class="game">
+   <div class="game-icon">🎲</div>
+   <h3>LUDO ROYALE</h3>
+   <p>Classic board-game fun.</p>
+   <small>COMING SOON</small>
+   <button class="btn" onclick="openGame('Ludo Royale')">EXPLORE →</button>
+  </div>
 
-<!-- ADMIN -->
-<section id="admin" class="panel hidden">
-<h2>⚜ ADMIN CHIP CONTROL</h2>
-<p>Manually add virtual chips to a player.</p>
+  <div class="game">
+   <div class="game-icon">🐉</div>
+   <h3>DRAGON ARENA</h3>
+   <p>Dragon-themed entertainment.</p>
+   <small>COMING SOON</small>
+   <button class="btn" onclick="openGame('Dragon Arena')">EXPLORE →</button>
+  </div>
 
-<label>PLAYER ID</label>
-<input id="adminPlayerID" placeholder="Example: M7-0001">
+  <div class="game">
+   <div class="game-icon">⚡</div>
+   <h3>ARCADE ZONE</h3>
+   <p>Fast-paced casual games.</p>
+   <small>COMING SOON</small>
+   <button class="btn" onclick="openGame('Arcade Zone')">EXPLORE →</button>
+  </div>
 
-<label>CHIPS TO ADD</label>
-<input id="adminAmount" type="number" min="1"
-placeholder="Enter chip amount">
+ </div>
 
-<button onclick="adminAddChips()">ADD CHIPS</button>
+ <div class="stats">
+  <div class="stat">
+   <strong>7</strong>
+   <span>ROYAL IDENTITY</span>
+  </div>
+  <div class="stat">
+   <strong>1 CR</strong>
+   <span>DISPLAY CHIPS</span>
+  </div>
+  <div class="stat">
+   <strong>∞</strong>
+   <span>ENTERTAINMENT</span>
+  </div>
+ </div>
 
-<p id="adminMessage"></p>
-
-<hr style="border-color:#70531f">
-<h3>PLAYER BALANCE</h3>
-<p id="adminBalance">10,000</p>
-</section>
-
-<!-- GAME TABLE -->
-<section id="play" class="panel hidden">
-<h2>♛ <span id="gameName">ROYAL GAME TABLE</span></h2>
-<p style="color:#c4ad7e">Demo table · Six seats · Virtual chips</p>
-
-<div id="table">
-<div class="seat">
-<div class="avatar">🤴</div>
-ROYAL PLAYER
-</div>
-<div class="seat">
-<div class="avatar">👑</div>
-ROYAL 02
-</div>
-<div class="seat">
-<div class="avatar">🧔</div>
-ROYAL 03
-</div>
-<div class="seat">
-<div class="avatar">👸</div>
-ROYAL 04
-</div>
-<div class="seat">
-<div class="avatar">🃏</div>
-ROYAL 05
-</div>
-<div class="seat">
-<div class="avatar">🤵</div>
-ROYAL 06
-</div>
-</div>
-
-<h3>YOUR CARDS</h3>
-<div id="cards"></div>
-
-<button onclick="dealCards()">DEAL CARDS</button>
-<button class="secondary" onclick="drawCard()">DRAW CARD</button>
-<button class="secondary" onclick="discardCard()">DISCARD LAST</button>
-<button class="danger" onclick="showSection('games')">EXIT TABLE</button>
-</section>
+ <div class="notice" id="about">
+  👑 <strong>THE MAJESTIC7 EXPERIENCE</strong><br><br>
+  A virtual entertainment universe built around friends, strategy and classic games.
+  Virtual chips have no cash value. No deposits, withdrawals or real-money wagering.
+ </div>
 
 </main>
 
 <footer>
-♛ MAJESTIC7 · ROYAL GAMING UNIVERSE ♛
-<p>Virtual chips only · Demo platform</p>
+ <strong>👑 MAJESTIC7</strong><br><br>
+ THE ROYAL GAMING UNIVERSE<br>
+ © 2026 MAJESTIC7. ALL RIGHTS RESERVED.
 </footer>
 
+<div class="modal" id="gameModal" onclick="if(event.target===this)closeGame()">
+ <div class="modal-box">
+  <h2 id="modalTitle">ROYAL ARENA</h2>
+  <p id="modalText">Welcome to MAJESTIC7.</p>
+  <button class="close" onclick="closeGame()">CLOSE</button>
+ </div>
+</div>
+
 <script>
-const MAX_CHIPS = 10000000;
-
-let player = JSON.parse(
-localStorage.getItem("m7_player")
-) || {
-name:"ROYAL PLAYER",
-id:"M7-0001",
-chips:10000
-};
-
-let rooms = JSON.parse(
-localStorage.getItem("m7_rooms")
-) || [];
-
-let hand = [];
-
-const suits=["♠","♥","♦","♣"];
-const ranks=["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
-
-function savePlayer(){
-localStorage.setItem("m7_player",JSON.stringify(player));
-updateProfile();
-}
-
-function updateProfile(){
-document.getElementById("playerName").textContent=player.name;
-document.getElementById("playerID").textContent=player.id;
-document.getElementById("chipBalance").textContent=
-player.chips.toLocaleString("en-IN");
-document.getElementById("adminBalance").textContent=
-player.chips.toLocaleString("en-IN");
-}
-
-function showSection(id){
-["home","games","rooms","admin","play"].forEach(s=>{
-document.getElementById(s).classList.add("hidden");
-});
-document.getElementById(id).classList.remove("hidden");
-}
-
 function openGame(name){
-document.getElementById("gameName").textContent=name.toUpperCase();
-hand=[];
-renderCards();
-showSection("play");
+ document.getElementById('modalTitle').innerText=name.toUpperCase();
+ document.getElementById('modalText').innerText=
+ name==='Teen Patti Royale' || name==='Teen Patti' || name==='Indian Rummy'
+ ? 'You selected '+name+'. The game table and multiplayer connection need to be implemented next. This homepage is currently a front-end prototype.'
+ : name+' is part of the MAJESTIC7 game collection. Its playable game module is coming soon.';
+ document.getElementById('gameModal').style.display='flex';
 }
 
-function adminAddChips(){
-const id=document.getElementById("adminPlayerID").value.trim();
-const amount=Number(document.getElementById("adminAmount").value);
-const msg=document.getElementById("adminMessage");
-
-if(id!==player.id){
-msg.textContent="Player ID not found.";
-return;
+function closeGame(){
+ document.getElementById('gameModal').style.display='none';
 }
-if(!Number.isSafeInteger(amount)||amount<=0){
-msg.textContent="Enter a valid positive whole number.";
-return;
-}
-if(player.chips+amount>MAX_CHIPS){
-msg.textContent="Maximum balance is 1 crore chips.";
-return;
-}
-
-player.chips+=amount;
-savePlayer();
-msg.textContent=amount.toLocaleString("en-IN")+" virtual chips added successfully.";
-document.getElementById("adminAmount").value="";
-}
-
-function createRoom(){
-const name=document.getElementById("roomName").value.trim();
-if(!name)return alert("Enter room name");
-
-rooms.push({
-name:name,
-players:1,
-id:"ROOM-"+Math.floor(Math.random()*90000+10000)
-});
-localStorage.setItem("m7_rooms",JSON.stringify(rooms));
-document.getElementById("roomName").value="";
-renderRooms();
-}
-
-function renderRooms(){
-const list=document.getElementById("roomList");
-list.innerHTML="";
-rooms.forEach(room=>{
-const div=document.createElement("div");
-div.className="room";
-
-const title=document.createElement("b");
-title.textContent=room.name;
-const info=document.createElement("p");
-info.textContent=room.id+" · "+room.players+"/6 players · Demo room";
-div.append(title,info);
-list.appendChild(div);
-});
-}
-
-function newCard(){
-return {
-rank:ranks[Math.floor(Math.random()*13)],
-suit:suits[Math.floor(Math.random()*4)]
-};
-}
-
-function renderCards(){
-const area=document.getElementById("cards");
-area.innerHTML="";
-hand.forEach((card)=>{
-const div=document.createElement("div");
-div.className="playcard";
-if(card.suit==="♥"||card.suit==="♦")div.classList.add("redcard");
-div.textContent=card.rank+card.suit;
-area.appendChild(div);
-});
-}
-
-function dealCards(){
-hand=[];
-const game=document.getElementById("gameName").textContent;
-const count=game.includes("TEEN PATTI")?3:
-game==="29"?4:
-game==="POKER"?5:13;
-
-for(let i=0;i<count;i++)hand.push(newCard());
-renderCards();
-}
-
-function drawCard(){
-if(hand.length>=13)return alert("Maximum demo hand reached.");
-hand.push(newCard());
-renderCards();
-}
-
-function discardCard(){
-if(hand.length===0)return alert("No cards to discard.");
-hand.pop();
-renderCards();
-}
-
-updateProfile();
-renderRooms();
 </script>
+
 </body>
 </html>
