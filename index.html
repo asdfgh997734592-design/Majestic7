@@ -185,6 +185,24 @@ footer{text-align:center;padding:30px 10px;color:#806e51;font-size:12px}
 </section>
 
 <h2 class="section-title" id="games">✦ THE ROYAL GAME COLLECTION</h2>
+<section class="panel" id="profile">
+  <h2>👑 ROYAL PLAYER PROFILE</h2>
+  <div style="text-align:center;padding:15px">
+    <div style="font-size:65px">🤴</div>
+    <h2 id="playerName">ROYAL PLAYER</h2>
+    <p style="color:#ffd45a">PLAYER ID: <span id="playerId">M7-0001</span></p>
+  </div>
+  <input id="username" maxlength="20" placeholder="Enter your royal username">
+  <button class="btn" onclick="savePlayer()">SAVE PROFILE</button>
+  <div class="games">
+    <div class="game">
+      <span class="emoji">💰</span>
+      <b id="chipBalance">0</b>
+      <small>Virtual Chips</small>
+    </div>
+  </div>
+</section>
+  
 <section class="games">
  <div class="game" onclick="startGame('Indian 13-Card Rummy')"><span class="emoji">🂡</span><b>Indian 13-Card Rummy</b><small>Royal table</small></div>
  <div class="game" onclick="startGame('Points Rummy')"><span class="emoji">♠️</span><b>Points Rummy</b><small>Quick rounds</small></div>
