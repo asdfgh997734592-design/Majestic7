@@ -321,7 +321,31 @@ function savePlayer() {
     alert("Username must contain at least 3 characters.");
     return;
   }
+function adminAddChips() {
+  const playerId = document.getElementById("adminPlayerId").value.trim();
+  const amount = Number(document.getElementById("adminChipAmount").value);
+  const currentId = localStorage.getItem("m7_player_id");
 
+  if (playerId !== currentId) {
+    alert("Player ID not found on this device.");
+    return;
+  }
+
+  if (!Number.isSafeInteger(amount) || amount <= 0) {
+    alert("Enter a valid chip amount.");
+    return;
+  }
+
+  const balance = Number(localStorage.getItem("m7_chips") || 0);
+  const newBalance = balance + amount;
+
+  localStorage.setItem("m7_chips", String(newBalance));
+  document.getElementById("chipBalance").textContent =
+    newBalance.toLocaleString("en-IN");
+
+  document.getElementById("adminMessage").textContent =
+    "CHIPS ADDED SUCCESSFULLY!";
+}
   localStorage.setItem("m7_username", username);
 if (!localStorage.getItem("m7_player_id")) {
   localStorage.setItem(
