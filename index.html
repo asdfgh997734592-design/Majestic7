@@ -307,7 +307,17 @@ function savePlayer() {
     username.toUpperCase();
 
   alert("ROYAL PROFILE SAVED SUCCESSFULLY!");
+  }function loadPlayer() {
+  const savedUsername = localStorage.getItem("m7_username");
+
+  if (savedUsername) {
+    document.getElementById("username").value = savedUsername;
+    document.getElementById("playerName").textContent =
+      savedUsername.toUpperCase();
   }
+}
+
+loadPlayer();
 function startGame(name) {
   currentGame = name;
   document.getElementById("gameName").textContent = name;
