@@ -249,6 +249,170 @@ footer{text-align:center;padding:30px 10px;color:#806e51;font-size:12px}
 <footer>MAJESTIC7 © 2026 · ROYAL BLACK · GOLD · CRIMSON<br>Virtual-chip demo only. No deposits or cash withdrawals.</footer>
 
 <script>
-let currentGame="Indian 13-Card Rummy";
+let currentGame = "Indian 13-Card Rummy";
+let deck = [];
+let hand = [];
+let discard = [];
+let selected = -1;
+let room = "";
+
+const suits = ["♠", "♥", "♦", "♣"];
+const ranks = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+
+function startGame(name) {
+  currentGame = name;
+  document.getElementById("gameName").textContent = name;
+  document.getElementById("play").classList.remove("hidden");
+  document.getElementById("play").scrollIntoView({behavior:"smooth"});
+  document.getElementById("status").textContent =
+    "Welcome to " + name + "! Press DEAL to begin.";
+}
+
+function createDeck() {
+  deck = [];
+  suits.forEach(suit => {
+    ranks.forEach(rank => {
+      deck.push({rank, suit});
+    });
+  });
+
+  for (let i = deck.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+  }
+}
+
+function dealCards() {
+  createDeck();
+  hand = deck.splice(0, 13);
+  discard = [];
+  selected = -1;
+  renderHand();
+
+  document.getElementById("discardPile").textContent = "🂠";
+  document.getElementById("status").textContent =
+    "13 cards dealt. Select a card to play.";
+  document.getElementById("drawPile").textContent = "🂠";
+}
+
+function renderHand() {
+  const area = document.getElementById("hand");
+  area.innerHTML = "";
+
+  hand.forEach((card, index) => {
+    const div = document.createElement("div");
+    div.className = "card";
+
+    if (card.suit === "♥" || card.suit === "♦") {
+      div.classList.add("red");
+    }
+
+    if (selected === index) div.classList.add("selected");
+
+    div.innerHTML = `<span>${card.rank}</span><span>${card.suit}</span>`;
+    div.onclick = () => {
+      selected = index;
+      renderHand();
+    };
+
+    area.appendChild(div);
+  });
+}
+
+function drawCard() {
+  if (hand.length === 0) {
+    document.getElementById("status").textContent =
+      "Please deal your cards first.";
+    return;
+  }
+
+  if (hand.length >= 14) {
+    document.getElementById("status").textContent =
+      "Discard one card before drawing again.";
+    return;
+  }
+
+  if (deck.length === 0) {
+    document.getElementById("status").textContent =
+      "No cards remaining. Deal a new hand.";
+    return;
+  }
+
+  hand.push(deck.pop());
+  selected = -1;
+  renderHand();
+
+  document.getElementById("status").textContent =
+    "Card drawn. Select one card to discard.";
+}
+
+function discardCard() {
+  if (selected < 0) {
+    document.getElementById("status").textContent =
+      "Select a card first.";
+    return;
+  }
+
+  const card = hand.splice(selected, 1)[0];
+  discard.push(card);
+  selected = -1;
+
+  document.getElementById("discardPile").textContent =
+    card.rank + card.suit;
+
+  renderHand();
+
+  document.getElementById("status").textContent =
+    "Card discarded successfully.";
+}
+
+function createRoom() {
+  room = Math.random().toString(36).substring(2, 8).toUpperCase();
+
+  document.getElementById("roomCode").textContent = room;
+  document.getElementById("roomInfo").classList.remove("hidden");
+  document.getElementById("joinBox").classList.add("hidden");
+  document.getElementById("roomMessage").textContent =
+    "Demo room created. Share your invite code.";
+}
+
+function showJoin() {
+  document.getElementById("joinBox").classList.remove("hidden");
+  document.getElementById("roomInfo").classList.add("hidden");
+}
+
+function joinRoom() {
+  const code = document.getElementById("joinCode").value.trim().toUpperCase();
+
+  if (code.length < 4) {
+    document.getElementById("roomMessage").textContent =
+      "Enter a valid invite code.";
+    return;
+  }
+
+  document.getElementById("roomMessage").textContent =
+    "Invite code entered: " + code +
+    ". Multiplayer connection is not enabled yet.";
+}
+
+function copyCode() {
+  if (!room) return;
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(room).then(() => {
+      document.getElementById("roomMessage").textContent =
+        "Room code copied!";
+    }).catch(() => {
+      document.getElementById("roomMessage").textContent =
+        "Your room code is: " + room;
+    });
+  } else {
+    document.getElementById("roomMessage").textContent =
+      "Your room code is: " + room;
+  }
+}
+</script>
+</body>
+</html>
 
   
