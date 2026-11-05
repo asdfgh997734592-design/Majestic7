@@ -639,6 +639,31 @@ if (controls && !document.getElementById("advancedControls")) {
 
   controls.appendChild(box);
 }
+
+<!-- MAJESTIC7 FIREBASE CONNECTION -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDRB9MMiWSSJHg1Q2650JBJ1j-fSz9bF2o",
+  authDomain: "majestic7-bca40.firebaseapp.com",
+  databaseURL: "https://majestic7-bca40-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "majestic7-bca40",
+  storageBucket: "majestic7-bca40.firebasestorage.app",
+  messagingSenderId: "690737902698",
+  appId: "1:690737902698:web:fd69ae2d5bc6520f3b4613"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+window.m7Auth = firebase.auth();
+window.m7Database = firebase.database();
+
+console.log("MAJESTIC7 Firebase initialized!");
+</script>
+<!-- END FIREBASE CONNECTION -->
         
 </body>
  </html>
