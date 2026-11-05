@@ -664,6 +664,143 @@ window.m7Database = firebase.database();
 console.log("MAJESTIC7 Firebase initialized!");
 </script>
 <!-- END FIREBASE CONNECTION -->
+ 
+<!-- MAJESTIC7 ACCOUNT SYSTEM -->
+<style>
+.m7-auth {
+  max-width: 430px;
+  margin: 35px auto;
+  padding: 25px;
+  background: linear-gradient(145deg,#17100b,#090909);
+  border: 1px solid #d6a52b;
+  border-radius: 18px;
+  box-shadow: 0 0 25px #d6a52b44;
+  color: white;
+  font-family: Arial,sans-serif;
+  text-align: center;
+}
+.m7-auth h2 {
+  color: #ffd45b;
+  letter-spacing: 3px;
+}
+.m7-auth input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px;
+  margin: 9px 0;
+  border: 1px solid #a8791d;
+  border-radius: 9px;
+  background: #111;
+  color: white;
+}
+.m7-auth button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 9px;
+  background: linear-gradient(90deg,#a90020,#e1ad32);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+#m7Status {
+  margin-top: 15px;
+  overflow-wrap: anywhere;
+  color: #ffd45b;
+}
+</style>
+
+<section class="m7-auth">
+  <h2>👑 MAJESTIC7</h2>
+  <p>ENTER THE ROYAL ARENA</p>
+
+  <input id="m7Email" type="email"
+    placeholder="Email address" autocomplete="email">
+
+  <input id="m7Password" type="password"
+    placeholder="Password (minimum 6 characters)"
+    autocomplete="current-password">
+
+  <button id="m7Register">CREATE ACCOUNT</button>
+  <button id="m7Login">LOGIN</button>
+  <button id="m7Logout" hidden>LOGOUT</button>
+
+  <p id="m7Status">Welcome to MAJESTIC7</p>
+</section>
+
+<script>
+(() => {
+  const email = document.getElementById("m7Email");
+  const password = document.getElementById("m7Password");
+  const status = document.getElementById("m7Status");
+  const register = document.getElementById("m7Register");
+  const login = document.getElementById("m7Login");
+  const logout = document.getElementById("m7Logout");
+
+  function show(message) {
+    status.textContent = message;
+  }
+
+  function credentials() {
+    const e = email.value.trim();
+    const p = password.value;
+
+    if (!e || !p) {
+      show("Enter your email and password.");
+      return null;
+    }
+    if (p.length < 6) {
+      show("Password must contain at least 6 characters.");
+      return null;
+    }
+    return { e, p };
+  }
+
+  register.onclick = async () => {
+    const c = credentials();
+    if (!c) return;
+    try {
+      show("Creating your account...");
+      await window.m7Auth.createUserWithEmailAndPassword(c.e, c.p);
+      show("Account created successfully!");
+    } catch (error) {
+      show(error.message);
+    }
+  };
+
+  login.onclick = async () => {
+    const c = credentials();
+    if (!c) return;
+    try {
+      show("Signing in...");
+      await window.m7Auth.signInWithEmailAndPassword(c.e, c.p);
+      show("Login successful!");
+    } catch (error) {
+      show(error.message);
+    }
+  };
+
+  logout.onclick = async () => {
+    try {
+      await window.m7Auth.signOut();
+      show("You have logged out.");
+    } catch (error) {
+      show(error.message);
+    }
+  };
+
+  window.m7Auth.onAuthStateChanged(user => {
+    register.hidden = !!user;
+    login.hidden = !!user;
+    logout.hidden = !user;
+    email.hidden = !!user;
+    password.hidden = !!user;
+    show(user ? "Signed in: " + user.email : "Welcome! Create an account or login.");
+  });
+})();
+</script>
+<!-- END MAJESTIC7 ACCOUNT SYSTEM -->
         
 </body>
  </html>
