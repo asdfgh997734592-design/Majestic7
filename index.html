@@ -24,7 +24,7 @@ body:before{
  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
  background:repeating-linear-gradient(115deg,transparent 0 80px,#ffca3510 81px,transparent 83px);
 }
-*{scroll-behavior:smooth}
+*{scroll-behavior:smooth}é
 button{font:inherit;cursor:pointer}
 header{
  position:sticky;top:0;z-index:20;
@@ -383,19 +383,20 @@ loadPlayer();
   currentGame = game;
 
   document.getElementById("gameName").textContent = game;
-  document.getElementById("play").classList.remove("hidden");
 
-  document.getElementById("play").scrollIntoView();
+  const play = document.getElementById("play");
+  play.classList.remove("hidden");
+
+  play.scrollIntoView({ behavior: "smooth" });
 
   if (document.documentElement.requestFullscreen) {
-    document.documentElement.requestFullscreen().then(() => {
-      if (screen.orientation && screen.orientation.lock) {
-        screen.orientation.lock("landscape").catch(() => {});
-      }
-    }).catch(() => {});
-  }
+    document.documentElement.requestFullscreen().catch(() => {});
   }
 
+  if (screen.orientation && screen.orientation.lock) {
+    screen.orientation.lock("landscape").catch(() => {});
+  }
+}
 function createDeck() {
   deck = [];
   suits.forEach(suit => {
