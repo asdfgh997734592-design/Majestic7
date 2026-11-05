@@ -3,573 +3,165 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#08060b">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MAJESTIC7 | Royal Gaming Universe</title>
-
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap');
-
-:root{
- --gold:#f9d477;
- --gold2:#ffad32;
- --red:#d71938;
- --bg:#08060b;
- --panel:#15111a;
- --muted:#a49aa9;
-}
-
 *{box-sizing:border-box;margin:0;padding:0}
-
 body{
- background:
- radial-gradient(ellipse at 50% -20%,#49300d 0%,transparent 45%),
- radial-gradient(circle at 90% 40%,#25102d 0%,transparent 35%),
- var(--bg);
- color:white;
- font-family:'Rajdhani',sans-serif;
+ background:radial-gradient(ellipse at top,#30200b 0%,#100d09 42%,#030303 100%);
+ color:#fff;font-family:Arial,sans-serif;
  min-height:100vh;
- overflow-x:hidden;
 }
-
-body:before{
- content:"";
- position:fixed;
- inset:0;
- pointer-events:none;
- opacity:.13;
- background-image:linear-gradient(#ffffff0c 1px,transparent 1px),
- linear-gradient(90deg,#ffffff0c 1px,transparent 1px);
- background-size:45px 45px;
- mask-image:linear-gradient(to bottom,black,transparent);
-}
-
 header{
- height:75px;
- padding:0 5%;
- display:flex;
- align-items:center;
- justify-content:space-between;
- border-bottom:1px solid #d7a94a35;
- background:#09070de8;
- backdrop-filter:blur(20px);
- position:sticky;
- top:0;
- z-index:10;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:18px 22px;border-bottom:1px solid #80601d;
+ background:rgba(0,0,0,.75);
 }
-
-.logo{
- font-family:Orbitron;
- font-size:23px;
- font-weight:900;
- letter-spacing:2px;
- color:var(--gold);
- text-shadow:0 0 20px #ffb52b70;
+.logo{font-size:25px;font-weight:1000;letter-spacing:3px;color:#ffd45a}
+.status{color:#bda36c;font-size:11px;letter-spacing:2px}
+main{max-width:1100px;margin:auto;padding:24px 16px}
+h2{
+ color:#f8d77b;text-align:center;
+ font-size:17px;letter-spacing:4px;margin-bottom:22px;
 }
-
-.logo span{color:white}
-
-.nav{
- display:flex;
- align-items:center;
- gap:20px;
-}
-
-.nav a{
- color:#c9bdcc;
- text-decoration:none;
- font-size:15px;
- font-weight:700;
- cursor:pointer;
-}
-
-.nav a:hover{color:var(--gold)}
-
-.wallet{
- border:1px solid #d6ae55;
- border-radius:30px;
- padding:8px 15px;
- color:var(--gold);
- font-weight:700;
- background:#f7c75d12;
-}
-
-.hero{
- text-align:center;
- padding:55px 15px 35px;
- position:relative;
-}
-
-.crown{
- font-size:45px;
- filter:drop-shadow(0 0 20px #ffc84b);
- animation:float 3s ease-in-out infinite;
-}
-
-@keyframes float{
- 0%,100%{transform:translateY(0)}
- 50%{transform:translateY(-10px)}
-}
-
-.hero h1{
- font-family:Orbitron;
- font-size:clamp(30px,7vw,65px);
- font-weight:900;
- letter-spacing:3px;
- background:linear-gradient(120deg,#fff3c0,#e6a72c,#fff,#ad6811);
- background-size:200%;
- -webkit-background-clip:text;
- color:transparent;
- animation:shine 5s linear infinite;
-}
-
-@keyframes shine{to{background-position:200%}}
-
-.hero p{
- color:#c0b3c4;
- font-size:18px;
- letter-spacing:2px;
- margin-top:12px;
-}
-
-.hero-line{
- width:130px;
- height:2px;
- background:linear-gradient(90deg,transparent,var(--gold),transparent);
- margin:20px auto;
-}
-
-.section{
- max-width:1200px;
- margin:auto;
- padding:20px 18px;
-}
-
-.section-head{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin-bottom:20px;
-}
-
-.section-head h2{
- font-family:Orbitron;
- font-size:19px;
- letter-spacing:2px;
- color:var(--gold);
-}
-
-.section-head span{
- font-size:13px;
- color:var(--muted);
-}
-
-.featured{
- display:grid;
- grid-template-columns:1.4fr 1fr;
- gap:18px;
- margin-bottom:30px;
-}
-
-.feature{
- min-height:205px;
- position:relative;
- overflow:hidden;
- border:1px solid #d7aa504a;
- border-radius:18px;
- padding:25px;
- background:
- radial-gradient(circle at 85% 50%,#7c431b80,transparent 40%),
- linear-gradient(125deg,#281b18,#120e19);
- box-shadow:0 15px 45px #0008;
- transition:.4s;
-}
-
-.feature:hover{
- transform:perspective(800px) rotateY(-3deg) translateY(-5px);
- border-color:var(--gold);
-}
-
-.feature h3{
- font-family:Orbitron;
- color:var(--gold);
- font-size:21px;
- margin:12px 0;
-}
-
-.feature p{
- color:#c3b6c3;
- font-size:16px;
-}
-
-.feature .big{
- position:absolute;
- right:20px;
- bottom:0;
- font-size:100px;
- filter:drop-shadow(0 0 18px #ffbf4b80);
-}
-
-.btn{
- display:inline-block;
- border:0;
- border-radius:7px;
- padding:11px 22px;
- margin-top:18px;
- background:linear-gradient(120deg,#ffdf91,#bc7a17);
- color:#160e06;
- font-family:Orbitron;
- font-weight:800;
- font-size:11px;
- cursor:pointer;
- box-shadow:0 0 18px #ffbf4b30;
- transition:.3s;
-}
-
-.btn:hover{
- transform:scale(1.06);
- box-shadow:0 0 25px #ffc34b80;
-}
-
-.game-grid{
- display:grid;
- grid-template-columns:repeat(3,1fr);
+.games{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
  gap:17px;
 }
-
 .game{
- min-height:185px;
- position:relative;
- overflow:hidden;
- border-radius:15px;
- border:1px solid #ffffff18;
- background:linear-gradient(145deg,#211b29,#100d15);
- padding:20px;
- transition:.35s;
- cursor:pointer;
+ min-height:190px;position:relative;overflow:hidden;
+ border:1px solid #98732d;border-radius:17px;
+ background:linear-gradient(145deg,#30200c,#11100d 65%,#050505);
+ box-shadow:0 8px 25px #000, inset 0 0 22px #b17d1a22;
+ display:flex;flex-direction:column;align-items:center;
+ justify-content:center;gap:10px;
+ cursor:pointer;transition:.25s;
 }
-
+.game:before{
+ content:"";position:absolute;inset:0;
+ background:radial-gradient(circle at 50% 0%,#ffcf6530,transparent 65%);
+ pointer-events:none;
+}
+.game:active{transform:scale(.96)}
 .game:hover{
- transform:translateY(-7px);
- border-color:#e4b84c;
- box-shadow:0 12px 35px #c48a2430;
+ transform:translateY(-5px);
+ border-color:#ffe28a;
+ box-shadow:0 12px 35px #d69b3b33;
 }
-
-.game:after{
- content:"";
- position:absolute;
- width:150px;
- height:150px;
- border-radius:50%;
- right:-50px;
- top:-50px;
- background:#d99c3020;
- filter:blur(30px);
-}
-
-.game-icon{
- font-size:48px;
- margin-bottom:12px;
- filter:drop-shadow(0 0 12px #ffc34b50);
-}
-
-.game h3{
- font-family:Orbitron;
- font-size:15px;
- color:#f7d27c;
- margin-bottom:6px;
-}
-
-.game p{
- color:#aaa0b1;
- font-size:14px;
-}
-
-.game small{
- display:inline-block;
- margin-top:12px;
- color:#b8a6bd;
- border:1px solid #ffffff25;
- padding:4px 9px;
- border-radius:20px;
- font-size:11px;
-}
-
-.game button{
+.symbol{
+ font-size:61px;
+ filter:drop-shadow(0 5px 9px #d59b36);
  position:relative;
- z-index:2;
 }
-
-.stats{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:12px;
- margin:25px 0;
+.name{
+ color:#ffe3a0;font-weight:900;
+ font-size:15px;letter-spacing:2px;
+ position:relative;text-align:center;
 }
-
-.stat{
- text-align:center;
- padding:18px 8px;
- background:#ffffff08;
- border:1px solid #d3a74b30;
- border-radius:12px;
+.tag{
+ font-size:9px;color:#a99465;letter-spacing:2px;
+ position:relative;
 }
-
-.stat strong{
- display:block;
- color:var(--gold);
- font-family:Orbitron;
- font-size:19px;
+button{
+ border:1px solid #c79b3d;
+ background:linear-gradient(135deg,#ffe28c,#b47b18);
+ color:#160e03;font-weight:900;
+ padding:10px 23px;border-radius:30px;
+ margin-top:5px;cursor:pointer;position:relative;
 }
-
-.stat span{
- color:#a99eae;
- font-size:13px;
-}
-
-.notice{
- margin:25px 0;
- border:1px solid #d7aa5040;
- padding:17px;
- border-radius:12px;
- background:#d7aa500a;
- color:#c4b8c5;
- font-size:14px;
+#play{
+ display:none;margin-top:20px;
+ border:1px solid #b38a36;border-radius:17px;
+ padding:20px;background:#100e0a;
  text-align:center;
 }
-
-footer{
- text-align:center;
- border-top:1px solid #d7aa5030;
- padding:30px 15px;
- color:#827988;
- font-size:13px;
-}
-
-footer strong{color:var(--gold)}
-
-.modal{
- display:none;
- position:fixed;
- inset:0;
- z-index:30;
- background:#000d;
- backdrop-filter:blur(12px);
- align-items:center;
- justify-content:center;
- padding:20px;
-}
-
-.modal-box{
- width:100%;
- max-width:400px;
- background:linear-gradient(145deg,#251b29,#0e0a12);
- border:1px solid var(--gold);
- border-radius:18px;
- padding:30px;
- text-align:center;
- box-shadow:0 0 60px #dca33b35;
-}
-
-.modal-box h2{
- color:var(--gold);
- font-family:Orbitron;
- font-size:20px;
- margin-bottom:15px;
-}
-
-.modal-box p{
- color:#c2b7c7;
- font-size:16px;
- line-height:1.5;
-}
-
-.close{
- background:transparent;
- color:white;
- border:1px solid #ffffff40;
- padding:9px 20px;
- border-radius:6px;
- margin-top:20px;
- cursor:pointer;
-}
-
-@media(max-width:750px){
- header{height:65px;padding:0 14px}
- .logo{font-size:17px}
- .nav{gap:10px}
- .nav a{font-size:12px}
- .wallet{font-size:12px;padding:7px 10px}
- .hero{padding-top:38px}
- .featured{grid-template-columns:1fr}
- .feature{min-height:175px}
- .game-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
- .game{padding:15px;min-height:175px}
- .game-icon{font-size:38px}
- .game h3{font-size:12px}
- .section-head h2{font-size:15px}
-}
-
-@media(max-width:370px){
- .game-grid{grid-template-columns:1fr}
- .nav a{display:none}
+#play h2{margin:10px}
+#play p{color:#c7b17f;margin:12px}
+.back{background:#17130c;color:#f9d77c}
+@media(min-width:700px){
+ .games{grid-template-columns:repeat(3,1fr);gap:22px}
+ .game{min-height:230px}
+ .symbol{font-size:75px}
 }
 </style>
 </head>
-
 <body>
 
 <header>
- <div class="logo">👑 MAJESTIC<span>7</span></div>
- <nav class="nav">
-  <a href="#games">GAMES</a>
-  <a href="#about">ABOUT</a>
-  <div class="wallet">🪙 1 CR</div>
- </nav>
+ <div class="logo">♛ MAJESTIC7</div>
+ <div class="status">ROYAL GAME UNIVERSE</div>
 </header>
 
-<section class="hero">
- <div class="crown">👑</div>
- <h1>ENTER THE ROYAL ARENA</h1>
- <p>ONE UNIVERSE. INFINITE ENTERTAINMENT.</p>
- <div class="hero-line"></div>
-</section>
+<main>
+ <h2>✦ SELECT YOUR GAME ✦</h2>
 
-<main class="section">
+ <div class="games" id="games">
 
- <div class="section-head">
-  <h2>ROYAL SPOTLIGHT</h2>
-  <span>EXCLUSIVE ARENA</span>
- </div>
-
- <div class="featured">
-
-  <div class="feature">
-   <div>♠ PRIVATE TABLES</div>
-   <h3>TEEN PATTI ROYALE</h3>
-   <p>Invite friends. Create your private table. Enjoy the royal experience.</p>
-   <button class="btn" onclick="openGame('Teen Patti Royale')">ENTER ARENA →</button>
-   <div class="big">🃏</div>
+  <div class="game" onclick="openGame('TEEN PATTI','♠️')">
+   <div class="symbol">🂡</div>
+   <div class="name">TEEN PATTI</div>
+   <div class="tag">ROYAL CARD TABLE</div>
+   <button>PLAY NOW</button>
   </div>
 
-  <div class="feature">
-   <div>♦ CLASSIC CARD ARENA</div>
-   <h3>INDIAN RUMMY</h3>
-   <p>13-card Rummy. Classic gameplay. Royal atmosphere.</p>
-   <button class="btn" onclick="openGame('Indian Rummy')">PLAY NOW →</button>
-   <div class="big">🎴</div>
+  <div class="game" onclick="openGame('INDIAN RUMMY','🃏')">
+   <div class="symbol">🃏</div>
+   <div class="name">INDIAN RUMMY</div>
+   <div class="tag">13 CARD CHALLENGE</div>
+   <button>PLAY NOW</button>
   </div>
 
- </div>
-
- <div class="section-head" id="games">
-  <h2>THE GAME COLLECTION</h2>
-  <span>CHOOSE YOUR GAME</span>
- </div>
-
- <div class="game-grid">
-
-  <div class="game">
-   <div class="game-icon">🃏</div>
-   <h3>TEEN PATTI</h3>
-   <p>Classic three-card experience.</p>
-   <small>PRIVATE TABLES</small>
-   <button class="btn" onclick="openGame('Teen Patti')">OPEN GAME →</button>
+  <div class="game" onclick="openGame('ANDAR BAHAR','🎴')">
+   <div class="symbol">🎴</div>
+   <div class="name">ANDAR BAHAR</div>
+   <div class="tag">CLASSIC CARD GAME</div>
+   <button>PLAY NOW</button>
   </div>
 
-  <div class="game">
-   <div class="game-icon">🎴</div>
-   <h3>INDIAN RUMMY</h3>
-   <p>Indian 13-card Rummy.</p>
-   <small>CLASSIC MODE</small>
-   <button class="btn" onclick="openGame('Indian Rummy')">OPEN GAME →</button>
+  <div class="game" onclick="openGame('LUDO ROYAL','🎲')">
+   <div class="symbol">🎲</div>
+   <div class="name">LUDO ROYAL</div>
+   <div class="tag">ROYAL BOARD GAME</div>
+   <button>PLAY NOW</button>
   </div>
 
-  <div class="game">
-   <div class="game-icon">♠️</div>
-   <h3>POKER ROOM</h3>
-   <p>Strategic card entertainment.</p>
-   <small>COMING SOON</small>
-   <button class="btn" onclick="openGame('Poker Room')">EXPLORE →</button>
+  <div class="game" onclick="openGame('POKER','♠️')">
+   <div class="symbol">♠️</div>
+   <div class="name">ROYAL POKER</div>
+   <div class="tag">POKER TABLE</div>
+   <button>PLAY NOW</button>
   </div>
 
-  <div class="game">
-   <div class="game-icon">🎲</div>
-   <h3>LUDO ROYALE</h3>
-   <p>Classic board-game fun.</p>
-   <small>COMING SOON</small>
-   <button class="btn" onclick="openGame('Ludo Royale')">EXPLORE →</button>
-  </div>
-
-  <div class="game">
-   <div class="game-icon">🐉</div>
-   <h3>DRAGON ARENA</h3>
-   <p>Dragon-themed entertainment.</p>
-   <small>COMING SOON</small>
-   <button class="btn" onclick="openGame('Dragon Arena')">EXPLORE →</button>
-  </div>
-
-  <div class="game">
-   <div class="game-icon">⚡</div>
-   <h3>ARCADE ZONE</h3>
-   <p>Fast-paced casual games.</p>
-   <small>COMING SOON</small>
-   <button class="btn" onclick="openGame('Arcade Zone')">EXPLORE →</button>
+  <div class="game" onclick="openGame('BLACKJACK','♣️')">
+   <div class="symbol">♣️</div>
+   <div class="name">BLACKJACK</div>
+   <div class="tag">21 CARD CHALLENGE</div>
+   <button>PLAY NOW</button>
   </div>
 
  </div>
 
- <div class="stats">
-  <div class="stat">
-   <strong>7</strong>
-   <span>ROYAL IDENTITY</span>
-  </div>
-  <div class="stat">
-   <strong>1 CR</strong>
-   <span>DISPLAY CHIPS</span>
-  </div>
-  <div class="stat">
-   <strong>∞</strong>
-   <span>ENTERTAINMENT</span>
-  </div>
- </div>
-
- <div class="notice" id="about">
-  👑 <strong>THE MAJESTIC7 EXPERIENCE</strong><br><br>
-  A virtual entertainment universe built around friends, strategy and classic games.
-  Virtual chips have no cash value. No deposits, withdrawals or real-money wagering.
- </div>
-
+ <section id="play">
+  <div id="gameIcon" style="font-size:65px"></div>
+  <h2 id="gameName"></h2>
+  <p>MAJESTIC7 ROYAL GAME ROOM</p>
+  <p>Virtual demo · No real-money wagering</p>
+  <button class="back" onclick="goBack()">← BACK TO GAMES</button>
+ </section>
 </main>
 
-<footer>
- <strong>👑 MAJESTIC7</strong><br><br>
- THE ROYAL GAMING UNIVERSE<br>
- © 2026 MAJESTIC7. ALL RIGHTS RESERVED.
-</footer>
-
-<div class="modal" id="gameModal" onclick="if(event.target===this)closeGame()">
- <div class="modal-box">
-  <h2 id="modalTitle">ROYAL ARENA</h2>
-  <p id="modalText">Welcome to MAJESTIC7.</p>
-  <button class="close" onclick="closeGame()">CLOSE</button>
- </div>
-</div>
-
 <script>
-function openGame(name){
- document.getElementById('modalTitle').innerText=name.toUpperCase();
- document.getElementById('modalText').innerText=
- name==='Teen Patti Royale' || name==='Teen Patti' || name==='Indian Rummy'
- ? 'You selected '+name+'. The game table and multiplayer connection need to be implemented next. This homepage is currently a front-end prototype.'
- : name+' is part of the MAJESTIC7 game collection. Its playable game module is coming soon.';
- document.getElementById('gameModal').style.display='flex';
+function openGame(name,icon){
+ document.getElementById('games').style.display='none';
+ document.getElementById('play').style.display='block';
+ document.getElementById('gameName').textContent=name;
+ document.getElementById('gameIcon').textContent=icon;
+ window.scrollTo({top:0,behavior:'smooth'});
 }
-
-function closeGame(){
- document.getElementById('gameModal').style.display='none';
+function goBack(){
+ document.getElementById('play').style.display='none';
+ document.getElementById('games').style.display='grid';
 }
 </script>
-
 </body>
 </html>
