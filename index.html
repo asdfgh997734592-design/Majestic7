@@ -500,7 +500,25 @@ loadPlayer();
   if (screen.orientation && screen.orientation.lock) {
     screen.orientation.lock("landscape").catch(() => {});
   }
-}
+}function openTeenPatti() {
+  document.getElementById("play").classList.add("hidden");
+
+  const game = document.getElementById("teenPatti");
+  game.classList.remove("hidden");
+
+  document.getElementById("tpBalance").textContent =
+    Number(localStorage.getItem("m7_chips") || 0).toLocaleString("en-IN");
+
+  game.scrollIntoView({ behavior: "smooth" });
+
+  if (document.documentElement.requestFullscreen) {
+    document.documentElement.requestFullscreen().catch(() => {});
+  }
+
+  if (screen.orientation && screen.orientation.lock) {
+    screen.orientation.lock("landscape").catch(() => {});
+  }
+  }
 function createDeck() {
   deck = [];
   suits.forEach(suit => {
