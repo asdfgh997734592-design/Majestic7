@@ -1,1 +1,419 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#090806">
+<title>MAJESTIC7 | Royal Gaming</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--gold:#f5ca70;--gold2:#a66c18;--bg:#090806;--panel:#17130d;--muted:#b9aa8d}
+body{background:radial-gradient(circle at top,#30200c,#090806 48%);color:#fff4dc;font-family:Arial,sans-serif;min-height:100vh}
+button,input{font:inherit}
+button{cursor:pointer}
+header{padding:18px 15px;text-align:center;border-bottom:1px solid #73511f;background:#100d08;position:sticky;top:0;z-index:5}
+.brand{font-size:29px;font-weight:1000;letter-spacing:5px;color:var(--gold);text-shadow:0 0 15px #d99b36}
+.tag{font-size:10px;letter-spacing:4px;color:#d6b779;margin-top:5px}
+.wrap{max-width:650px;margin:auto;padding:14px}
+.panel{background:linear-gradient(145deg,#21190e,#100e0a);border:1px solid #79551f;border-radius:17px;padding:17px;margin:13px 0;box-shadow:0 8px 28px #0008}
+.kubera{text-align:center;padding:22px 12px;background:radial-gradient(circle at center,#64400f,#1a1207 55%,#090806);border:2px solid #d7a83f;box-shadow:0 0 22px #d7a83f33}
+.kubera .face{font-size:65px;filter:drop-shadow(0 0 12px gold)}
+.kubera h2{font-size:27px;letter-spacing:4px;color:#ffdc82;text-shadow:0 0 14px #e7a52d}
+.kubera p{font-size:11px;letter-spacing:3px;color:#e9c77f;margin-top:7px}
+h3{color:var(--gold);font-size:17px;margin-bottom:12px}
+.muted{color:var(--muted);font-size:12px;line-height:1.6}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.balance{font-size:25px;color:#ffe19a;font-weight:900}
+.gold{color:var(--gold)}
+input{width:100%;padding:13px;background:#090806;border:1px solid #745323;border-radius:10px;color:white;margin:7px 0;outline:none}
+.btn{border:0;border-radius:10px;padding:12px 15px;font-weight:900;background:linear-gradient(120deg,#ffe9a7,#c28a29);color:#241605}
+.btn.secondary{background:#302413;color:#f8d88e;border:1px solid #8b642b}
+.btn.danger{background:#56251c;color:#ffb3a2;border:1px solid #9e4431}
+.btn.small{padding:8px 11px;font-size:12px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.game{min-height:130px;background:linear-gradient(145deg,#2a200f,#100e0a);border:1px solid #8b652c;border-radius:15px;padding:15px;text-align:center;color:white}
+.game:active{transform:scale(.98)}
+.game .emoji{font-size:34px;display:block;margin-bottom:9px}
+.game strong{color:#ffdb88;font-size:14px}
+.game small{display:block;color:#bca77e;font-size:10px;margin-top:6px}
+.hidden{display:none!important}
+.cards{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 0}
+.playcard{width:61px;height:83px;border-radius:9px;background:#fff;color:#17120b;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;box-shadow:0 3px 8px #0008}
+.playcard.red{color:#c42b2b}
+.result{padding:13px;background:#090806;border:1px solid #5c451f;border-radius:10px;margin:12px 0;line-height:1.6;text-align:center}
+.admin-row{padding:10px 0;border-bottom:1px solid #44341d}
+footer{text-align:center;padding:24px;color:#9f8b66;font-size:10px;letter-spacing:1px}
+hr{border:0;border-top:1px solid #49361c;margin:14px 0}
+a{color:var(--gold)}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand">MAJESTIC7</div>
+ <div class="tag">THE ROYAL PLAYGROUND</div>
+</header>
+
+<main class="wrap">
+ <section id="login" class="panel">
+  <div class="kubera">
+   <div class="face">👑</div>
+   <h2>ॐ KUBERA</h2>
+   <p>ROYAL FORTUNE • MAJESTIC7</p>
+  </div>
+  <h3 style="margin-top:18px">Enter the Royal Kingdom</h3>
+  <input id="playerName" maxlength="20" placeholder="Enter your player name">
+  <button class="btn" style="width:100%" onclick="login()">ENTER GAME</button>
+  <p class="muted" style="margin-top:10px">Virtual demo chips only. Your progress is saved in this browser.</p>
+ </section>
+
+ <section id="app" class="hidden">
+  <div class="panel">
+   <div class="row">
+    <div>
+     <div class="muted">WELCOME, PLAYER</div>
+     <h3 id="welcome" style="margin:5px 0">Royal Player</h3>
+    </div>
+    <button class="btn secondary small" onclick="logout()">LOG OUT</button>
+   </div>
+   <hr>
+   <div class="row">
+    <div><div class="muted">YOUR VIRTUAL CHIPS</div><div class="balance" id="balance">0</div></div>
+    <div class="muted">ROYAL MEMBER</div>
+   </div>
+  </div>
+
+  <div class="kubera panel">
+   <div class="face">👑</div>
+   <h2>KUBERA</h2>
+   <p>THE ROYAL TREASURY</p>
+  </div>
+
+  <h3>♛ Royal Games</h3>
+  <div class="grid">
+   <button class="game" onclick="openGame('teen')"><span class="emoji">🂡</span><strong>TEEN PATTI</strong><small>Three-card challenge</small></button>
+   <button class="game" onclick="openGame('rummy')"><span class="emoji">🃏</span><strong>ROYAL RUMMY</strong><small>Find a set or sequence</small></button>
+   <button class="game" onclick="openGame('andar')"><span class="emoji">🎴</span><strong>ANDAR BAHAR</strong><small>Pick the matching side</small></button>
+   <button class="game" onclick="openGame('number')"><span class="emoji">⑦</span><strong>NUMBER ARENA</strong><small>Guess the secret number</small></button>
+   <button class="game" onclick="openGame('memory')"><span class="emoji">🧠</span><strong>MEMORY MATCH</strong><small>Match all the pairs</small></button>
+   <button class="game" onclick="openGame('chess')"><span class="emoji">♟️</span><strong>ROYAL CHESS</strong><small>Mini chess puzzle</small></button>
+  </div>
+
+  <section id="gameArea" class="panel hidden">
+   <div class="row">
+    <h3 id="gameTitle">GAME</h3>
+    <button class="btn secondary small" onclick="closeGame()">BACK</button>
+   </div>
+   <div id="gameContent"></div>
+  </section>
+
+  <section class="panel">
+   <div class="row">
+    <h3>♛ Royal Account</h3>
+    <button class="btn secondary small" onclick="showHistory()">HISTORY</button>
+   </div>
+   <div id="history" class="muted hidden"></div>
+  </section>
+
+  <section class="panel">
+   <button class="btn secondary" style="width:100%" onclick="adminEntry()">👑 KUBERA ADMIN</button>
+  </section>
+ </section>
+
+ <section id="admin" class="hidden">
+  <div class="kubera panel">
+   <div class="face">👑</div>
+   <h2>KUBERA ADMIN</h2>
+   <p>ROYAL TREASURY CONTROL</p>
+  </div>
+  <section class="panel">
+   <h3 id="adminHeading">Admin Login</h3>
+   <p class="muted" id="adminHelp">First visit? Create an admin PIN. Keep it private.</p>
+   <input id="adminPin" type="password" inputmode="numeric" maxlength="12" placeholder="Admin PIN">
+   <button class="btn" style="width:100%" onclick="adminAuthenticate()">CONTINUE</button>
+   <button class="btn secondary" style="width:100%;margin-top:8px" onclick="closeAdmin()">BACK TO GAME</button>
+  </section>
+  <div id="dashboard" class="hidden">
+   <section class="panel">
+    <h3>Virtual Chip Management</h3>
+    <input id="targetName" placeholder="Exact player name">
+    <input id="chipAmount" type="number" min="1" max="1000000" placeholder="Chip amount">
+    <div class="row">
+     <button class="btn" onclick="changeChips('add')">＋ ADD CHIPS</button>
+     <button class="btn danger" onclick="changeChips('remove')">－ DEDUCT CHIPS</button>
+    </div>
+    <p class="muted" style="margin-top:10px">These changes affect this browser's local demo data only.</p>
+   </section>
+   <section class="panel">
+    <h3>Player Accounts</h3>
+    <div id="playerList"></div>
+   </section>
+   <section class="panel">
+    <h3>Recent Transactions</h3>
+    <div id="adminTransactions" class="muted"></div>
+   </section>
+   <section class="panel">
+    <h3>Security</h3>
+    <input id="newPin" type="password" inputmode="numeric" maxlength="12" placeholder="New admin PIN (6–12 digits)">
+    <button class="btn secondary" style="width:100%" onclick="changePin()">CHANGE ADMIN PIN</button>
+   </section>
+   <button class="btn danger" style="width:100%" onclick="adminLogout()">LOCK ADMIN</button>
+  </div>
+ </section>
+</main>
+<footer>MAJESTIC7 • VIRTUAL PLAY • PLAY RESPONSIBLY</footer>
+
+<script>
+const KEY="majestic7_complete_demo_v1";
+let db=loadDB(),current="",activeGame="";
+
+function loadDB(){
+ try{
+  return JSON.parse(localStorage.getItem(KEY))||{players:{},adminPin:"",transactions:[]};
+ }catch(e){return {players:{},adminPin:"",transactions:[]};}
+}
+function save(){localStorage.setItem(KEY,JSON.stringify(db))}
+function player(){return db.players[current]}
+function safe(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function message(s){alert(s)}
+function login(){
+ let name=document.getElementById("playerName").value.trim();
+ if(!name)return message("Enter your player name.");
+ let id=name.toLowerCase();
+ if(!db.players[id])db.players[id]={name:name,balance:1000};
+ current=id;save();showApp();
+}
+function showApp(){
+ document.getElementById("login").classList.add("hidden");
+ document.getElementById("admin").classList.add("hidden");
+ document.getElementById("app").classList.remove("hidden");
+ document.getElementById("welcome").textContent=player().name;
+ updateBalance();closeGame();
+}
+function logout(){current="";document.getElementById("app").classList.add("hidden");document.getElementById("login").classList.remove("hidden")}
+function updateBalance(){if(player())document.getElementById("balance").textContent=player().balance.toLocaleString("en-IN")}
+function transact(name,amount,reason){
+ db.transactions.unshift({name,amount,reason,date:new Date().toLocaleString()});
+ db.transactions=db.transactions.slice(0,100);save();
+}
+function spend(amount){
+ if(!player()||player().balance<amount){message("Not enough virtual chips. Ask the admin for demo chips.");return false}
+ player().balance-=amount;transact(player().name,-amount,"Game entry");save();updateBalance();return true;
+}
+function reward(amount,reason){
+ player().balance+=amount;transact(player().name,amount,reason);save();updateBalance();
+}
+function openGame(game){
+ activeGame=game;
+ document.getElementById("gameArea").classList.remove("hidden");
+ document.getElementById("gameArea").scrollIntoView({behavior:"smooth"});
+ const titles={teen:"TEEN PATTI",rummy:"ROYAL RUMMY",andar:"ANDAR BAHAR",number:"NUMBER ARENA",memory:"MEMORY MATCH",chess:"ROYAL CHESS"};
+ document.getElementById("gameTitle").textContent=titles[game];
+ const funcs={teen:teenGame,rummy:rummyGame,andar:andarGame,number:numberGame,memory:memoryGame,chess:chessGame};
+ funcs[game]();
+}
+function closeGame(){activeGame="";document.getElementById("gameArea").classList.add("hidden");document.getElementById("gameContent").innerHTML=""}
+function render(html){document.getElementById("gameContent").innerHTML=html}
+function card(rank,suit){
+ let red=suit==="♥"||suit==="♦";
+ return `<div class="playcard ${red?"red":""}">${rank}${suit}</div>`;
+}
+const suits=["♠","♥","♦","♣"];
+const ranks=["2","3","4","5","6","7","8","9","10","J","Q","K","A"];
+function deck(){
+ let a=[];for(let s of suits)for(let i=0;i<13;i++)a.push({r:i+2,label:ranks[i],s});
+ return a.sort(()=>Math.random()-.5);
+}
+function showCards(cards){return `<div class="cards">${cards.map(c=>card(c.label,c.s)).join("")}</div>`}
+
+// TEEN PATTI: three-card practice hand versus dealer
+function teenRank(hand){
+ let vals=hand.map(c=>c.r).sort((a,b)=>a-b),flush=hand.every(c=>c.s===hand[0].s);
+ let trio=vals[0]===vals[2],seq=vals[1]===vals[0]+1&&vals[2]===vals[1]+1;
+ if(trio)return 6;
+ if(seq&&flush)return 5;
+ if(flush)return 4;
+ if(seq)return 3;
+ if(vals[0]===vals[1]||vals[1]===vals[2])return 2;
+ return 1;
+}
+function teenGame(){
+ render(`<p class="muted">Compare your three cards with the dealer. Entry: 10 virtual chips. Win: 20 chips returned as a demo reward.</p><button class="btn" onclick="playTeen()">DEAL CARDS</button><div id="teenResult"></div>`);
+}
+function playTeen(){
+ if(!spend(10))return;
+ let d=deck(),a=d.splice(0,3),b=d.splice(0,3),ra=teenRank(a),rb=teenRank(b);
+ let names=["","High card","Pair","Sequence","Flush","Straight flush","Three of a kind"];
+ let win=ra>rb;
+ if(ra===rb)win=a.reduce((x,c)=>x+c.r,0)>b.reduce((x,c)=>x+c.r,0);
+ if(win)reward(20,"Teen Patti demo win");
+ document.getElementById("teenResult").innerHTML=
+ `<div class="result"><b>Your cards</b>${showCards(a)}<b>Dealer</b>${showCards(b)}<p>${names[ra]} vs ${names[rb]}</p><h3>${win?"YOU WIN! +20 CHIPS":ra===rb?"ROUND TIED":"DEALER WINS"}</h3></div>`;
+}
+
+// ROYAL RUMMY: three-card set/sequence practice
+function rummyGame(){
+ render(`<p class="muted">Try to make a set (three equal ranks) or a same-suit sequence. Entry: 10 chips. A valid meld earns 20 chips.</p><button class="btn" onclick="playRummy()">DEAL HAND</button><div id="rummyResult"></div>`);
+}
+function playRummy(){
+ if(!spend(10))return;
+ let d=deck(),hand=d.splice(0,3);
+ let values=hand.map(c=>c.r).sort((a,b)=>a-b);
+ let set=values[0]===values[2];
+ let sequence=values[1]===values[0]+1&&values[2]===values[1]+1&&hand.every(c=>c.s===hand[0].s);
+ let win=set||sequence;
+ if(win)reward(20,"Rummy demo meld");
+ document.getElementById("rummyResult").innerHTML=`<div class="result">${showCards(hand)}<h3>${set?"THREE OF A KIND":sequence?"PURE SEQUENCE": "NO MELD"}</h3>${win?"Valid meld! +20 chips":"Try another hand."}</div>`;
+}
+
+// ANDAR BAHAR: match a chosen side to the joker rank
+function andarGame(){
+ render(`<p class="muted">A centre card is revealed. Choose Andar or Bahar. Entry: 10 chips. Correct choice earns 20 chips.</p><div class="row"><button class="btn" onclick="playAndar('ANDAR')">ANDAR</button><button class="btn secondary" onclick="playAndar('BAHAR')">BAHAR</button></div><div id="andarResult"></div>`);
+}
+function playAndar(choice){
+ if(!spend(10))return;
+ let d=deck(),joker=d.pop(),draws=0,side="";
+ while(d.length){
+  let c=d.pop();draws++;
+  if(c.r===joker.r){side=draws%2?"ANDAR":"BAHAR";break}
+ }
+ let win=choice===side;if(win)reward(20,"Andar Bahar demo win");
+ document.getElementById("andarResult").innerHTML=`<div class="result"><p>Centre card</p>${card(joker.label,joker.s)}<p>Matching card appeared on: <b>${side}</b></p><h3>${win?"CORRECT! +20 CHIPS":"NOT THIS TIME"}</h3><p>${draws} cards revealed</p></div>`;
+}
+
+// NUMBER ARENA
+function numberGame(){
+ render(`<p class="muted">Guess a number from 1 to 10. Entry: 10 chips. Correct guess earns 50 chips.</p><input id="numberGuess" type="number" min="1" max="10" placeholder="Your guess: 1–10"><button class="btn" onclick="playNumber()">SUBMIT GUESS</button><div id="numberResult"></div>`);
+}
+function playNumber(){
+ let n=Number(document.getElementById("numberGuess").value);
+ if(!Number.isInteger(n)||n<1||n>10)return message("Choose a whole number from 1 to 10.");
+ if(!spend(10))return;
+ let answer=1+Math.floor(Math.random()*10),win=n===answer;
+ if(win)reward(50,"Number Arena demo win");
+ document.getElementById("numberResult").innerHTML=`<div class="result"><h3>${win?"JACKPOT! +50 CHIPS":"TRY AGAIN"}</h3>Secret number: <b>${answer}</b></div>`;
+}
+
+// MEMORY MATCH
+let memoryState={};
+function memoryGame(){
+ let icons=["👑","🌙","⭐","💎","🪙","♛","🔥","🦚"];
+ let deck2=[...icons,...icons].sort(()=>Math.random()-.5);
+ memoryState={deck:deck2,open:[],matched:[],moves:0,done:false};
+ render(`<p class="muted">Find all eight matching pairs. Complete the challenge to earn 30 virtual chips.</p><p id="memoryMoves">Moves: 0</p><div class="grid" id="memoryGrid">${deck2.map((x,i)=>`<button class="game" id="mem${i}" onclick="flipMemory(${i})" style="min-height:75px;font-size:25px">❔</button>`).join("")}</div><div id="memoryResult" class="result">Find all pairs!</div>`);
+}
+function flipMemory(i){
+ let m=memoryState;if(m.done||m.open.includes(i)||m.matched.includes(i))return;
+ m.open.push(i);document.getElementById("mem"+i).textContent=m.deck[i];document.getElementById("mem"+i).disabled=true;
+ if(m.open.length===2){
+  m.moves++;document.getElementById("memoryMoves").textContent="Moves: "+m.moves;
+  let [a,b]=m.open;
+  if(m.deck[a]===m.deck[b]){
+   m.matched.push(a,b);m.open=[];
+   if(m.matched.length===16){
+    m.done=true;reward(30,"Memory Match completed");
+    document.getElementById("memoryResult").textContent="ALL PAIRS MATCHED! +30 CHIPS";
+   }
+  }else{
+   setTimeout(()=>{
+    for(let x of [a,b]){
+     let el=document.getElementById("mem"+x);if(el){el.textContent="❔";el.disabled=false}
+    }
+    m.open=[];
+   },700);
+  }
+ }
+}
+
+// ROYAL CHESS: a simple, playable king-and-rook puzzle
+function chessGame(){
+ render(`<p class="muted">Mini chess puzzle: move the white rook to capture the black rook. Select your rook, then choose a legal square along its row or column. This is a movement puzzle, not a full chess engine.</p><div id="chessBoard" style="display:grid;grid-template-columns:repeat(4,1fr);max-width:300px;margin:15px auto;border:2px solid #c69b4a"></div><div id="chessMsg" class="result">White to move.</div><button class="btn secondary" onclick="chessGame()">RESET PUZZLE</button>`);
+ chessState={selected:false,done:false,rook:12,target:3};
+ drawChess();
+}
+let chessState={};
+function drawChess(){
+ let board=document.getElementById("chessBoard");if(!board)return;
+ board.innerHTML="";
+ for(let i=0;i<16;i++){
+  let cell=document.createElement("button");
+  cell.style.cssText=`height:65px;border:0;font-size:31px;background:${(Math.floor(i/4)+i%4)%2?"#8c693c":"#e5c88e"};color:#17120b`;
+  cell.textContent=i===chessState.rook?"♖":i===chessState.target?"♜":"";
+  cell.onclick=()=>moveChess(i);board.appendChild(cell);
+ }
+}
+function moveChess(i){
+ if(chessState.done)return;
+ if(i===chessState.rook){chessState.selected=true;document.getElementById("chessMsg").textContent="Rook selected. Choose a square in its row or column.";return}
+ if(!chessState.selected)return;
+ let a=chessState.rook,b=i;
+ let sameRow=Math.floor(a/4)===Math.floor(b/4),sameCol=a%4===b%4;
+ if(!sameRow&&!sameCol){document.getElementById("chessMsg").textContent="A rook moves horizontally or vertically.";return}
+ let step=sameRow?(b>a?1:-1):(b>a?4:-4);
+ for(let p=a+step;p!==b;p+=step){
+  if(p===chessState.target){document.getElementById("chessMsg").textContent="Path blocked.";return}
+ }
+ if(i===chessState.target){
+  chessState.done=true;reward(30,"Royal Chess puzzle solved");
+  document.getElementById("chessMsg").textContent="Puzzle solved! Black rook captured. +30 chips";
+ }else{chessState.rook=i;chessState.selected=false;document.getElementById("chessMsg").textContent="Good move. Continue to capture the black rook."}
+ drawChess();
+}
+
+// PLAYER HISTORY
+function showHistory(){
+ let el=document.getElementById("history");el.classList.toggle("hidden");
+ let list=db.transactions.filter(t=>t.name.toLowerCase()===current).slice(0,15);
+ el.innerHTML=list.length?list.map(t=>`<div class="admin-row">${safe(t.reason)}: <b>${t.amount>0?"+":""}${t.amount}</b><br>${safe(t.date)}</div>`).join(""):"No transactions yet.";
+}
+
+// ADMIN
+function adminEntry(){
+ document.getElementById("app").classList.add("hidden");
+ document.getElementById("admin").classList.remove("hidden");
+ document.getElementById("dashboard").classList.add("hidden");
+ document.getElementById("adminPin").value="";
+ document.getElementById("adminHeading").textContent=db.adminPin?"Admin Login":"Create Admin PIN";
+ document.getElementById("adminHelp").textContent=db.adminPin?"Enter your existing admin PIN.":"First visit: create a private 6–12 digit admin PIN.";
+}
+function adminAuthenticate(){
+ let pin=document.getElementById("adminPin").value;
+ if(!db.adminPin){
+  if(!/^\d{6,12}$/.test(pin))return message("Create a PIN with 6–12 digits.");
+  db.adminPin=pin;save();message("Admin PIN created. Keep it private.");
+ }else if(pin!==db.adminPin)return message("Incorrect admin PIN.");
+ document.getElementById("dashboard").classList.remove("hidden");
+ refreshAdmin();
+}
+function closeAdmin(){document.getElementById("admin").classList.add("hidden");if(current)document.getElementById("app").classList.remove("hidden");else document.getElementById("login").classList.remove("hidden")}
+function adminLogout(){document.getElementById("dashboard").classList.add("hidden");document.getElementById("adminPin").value="";document.getElementById("adminHeading").textContent="Admin Login"}
+function changeChips(mode){
+ let name=document.getElementById("targetName").value.trim().toLowerCase();
+ let amount=Number(document.getElementById("chipAmount").value);
+ if(!db.players[name])return message("Player not found. Ask them to log in on this browser first.");
+ if(!Number.isInteger(amount)||amount<1||amount>1000000)return message("Enter a valid chip amount.");
+ let p=db.players[name];
+ if(mode==="remove"&&p.balance<amount)return message("Player does not have enough chips.");
+ p.balance+=mode==="add"?amount:-amount;
+ transact(p.name,mode==="add"?amount:-amount,"Admin "+mode);
+ save();refreshAdmin();updateBalance();
+ message("Virtual chips updated for "+p.name+".");
+}
+function refreshAdmin(){
+ let names=Object.keys(db.players);
+ document.getElementById("playerList").innerHTML=names.length?names.map(id=>{
+  let p=db.players[id];return `<div class="admin-row"><div class="row"><b>${safe(p.name)}</b><span class="gold">${p.balance.toLocaleString("en-IN")} chips</span></div></div>`;
+ }).join(""):"No player accounts yet.";
+ document.getElementById("adminTransactions").innerHTML=db.transactions.slice(0,20).map(t=>`<div class="admin-row">${safe(t.name)} • ${safe(t.reason)} • <b>${t.amount>0?"+":""}${t.amount}</b><br>${safe(t.date)}</div>`).join("")||"No transactions yet.";
+}
+function changePin(){
+ let p=document.getElementById("newPin").value;
+ if(!/^\d{6,12}$/.test(p))return message("New PIN must be 6–12 digits.");
+ db.adminPin=p;save();document.getElementById("newPin").value="";
+ message("PIN changed. Store it safely.");
+}
+</script>
+</body>
+</html>
