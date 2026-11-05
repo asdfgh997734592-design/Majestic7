@@ -252,7 +252,26 @@ footer{text-align:center;padding:30px 10px;color:#806e51;font-size:12px}
     </div>
   </div>
 </section>
-<!-- END PLAYER PROFILE -->
+<!-- END PLAYER PROFILE --><!-- MAJESTIC7 ADMIN CHIP CONTROL -->
+<section class="panel" id="adminPanel">
+  <h2>👑 ADMIN CHIP CONTROL</h2>
+  <p style="color:#ffd45a">MANUAL VIRTUAL CHIP MANAGEMENT</p>
+
+  <input id="adminPlayerId"
+         placeholder="Enter Player ID">
+
+  <input id="adminChipAmount"
+         type="number"
+         min="1"
+         placeholder="Enter chips to add">
+
+  <button class="btn" onclick="adminAddChips()">
+    ADD CHIPS
+  </button>
+
+  <p id="adminMessage"></p>
+</section>
+<!-- END ADMIN CHIP CONTROL -->
 <section class="panel hidden" id="play">
  <h2>♛ <span id="gameName">ROYAL RUMMY TABLE</span></h2>
  <p style="color:#c4ad7e">Demo table · Six seats · Virtual chips</p>
