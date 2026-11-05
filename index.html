@@ -801,7 +801,231 @@ console.log("MAJESTIC7 Firebase initialized!");
 })();
 </script>
 <!-- END MAJESTIC7 ACCOUNT SYSTEM -->
-        
+   
+<!-- MAJESTIC7 PLAYER PROFILE -->
+<style>
+.m7-profile {
+  max-width:430px;
+  margin:30px auto;
+  padding:25px;
+  background:linear-gradient(145deg,#160b0b,#050505);
+  border:1px solid #d6a52b;
+  border-radius:20px;
+  box-shadow:0 0 25px #d6a52b55;
+  color:white;
+  text-align:center;
+  font-family:Arial,sans-serif;
+}
+.m7-profile h2 {color:#ffd45b;letter-spacing:2px}
+.m7-profile input {
+  width:100%;
+  box-sizing:border-box;
+  padding:14px;
+  margin:15px 0;
+  background:#111;
+  color:white;
+  border:1px solid #d6a52b;
+  border-radius:9px;
+}
+.m7-profile button {
+  width:100%;
+  padding:14px;
+  background:linear-gradient(90deg,#a90020,#e1ad32);
+  color:white;
+  border:0;
+  border-radius:9px;
+  font-weight:bold;
+}
+#m7ProfileStatus {color:#ffd45b;margin-top:15px}
+</style>
+
+<section class="m7-profile">
+  <h2>👑 PLAYER PROFILE</h2>
+  <p>CREATE YOUR ROYAL ID</p>
+  <input id="m7Username" maxlength="20"
+    placeholder="Choose username (3–20 characters)">
+  <button id="m7SaveProfile">SAVE PROFILE</button>
+  <p id="m7PlayerId">Player ID: Loading...</p>
+  <p id="m7ProfileStatus">Please login first.</p>
+</section>
+
+<script>
+(() => {
+  const username = document.getElementById("m7Username");
+  const save = document.getElementById("m7SaveProfile");
+  const playerId = document.getElementById("m7PlayerId");
+  const status = document.getElementById("m7ProfileStatus");
+
+  window.m7Auth.onAuthStateChanged(async user => {
+    if (!user) {
+      status.textContent = "Please login first.";
+      playerId.textContent = "Player ID: Not available";
+      save.disabled = true;
+      return;
+    }
+
+    save.disabled = false;
+    playerId.textContent = "Player ID: " + user.uid;
+
+    const profileRef = window.m7Database
+      .ref("players/" + user.uid + "/profile");
+
+    try {
+      const snapshot = await profileRef.once("value");
+      if (snapshot.exists()) {
+        username.value = snapshot.val().username || "";
+        status.textContent = "Profile loaded successfully!";
+      } else {
+        status.textContent = "Choose your username.";
+      }
+    } catch (error) {
+      status.textContent = "Load error: " + error.message;
+    }
+  });
+
+  save.onclick = async () => {
+    const user = window.m7Auth.currentUser;
+    const name = username.value.trim();
+
+    if (!user) {
+      status.textContent = "Please login first.";
+      return;
+    }
+
+    if (name.length < 3 || name.length > 20) {
+      status.textContent = "Username must be 3–20 characters.";
+      return;
+    }
+
+    try {
+      await window.m7Database
+        .ref("players/" + user.uid + "/profile")
+        .set({
+          username: name,
+          playerId: user.uid
+        });
+
+      status.textContent = "Profile saved successfully!";
+    } catch (error) {
+      status.textContent = "Save error: " + error.message;
+    }
+  };
+})();
+</script>
+<!-- END PLAYER PROFILE -->
+    
+<!-- MAJESTIC7 PLAYER PROFILE -->
+<style>
+.m7-profile {
+  max-width:430px;
+  margin:30px auto;
+  padding:25px;
+  background:linear-gradient(145deg,#160b0b,#050505);
+  border:1px solid #d6a52b;
+  border-radius:20px;
+  box-shadow:0 0 25px #d6a52b55;
+  color:white;
+  text-align:center;
+  font-family:Arial,sans-serif;
+}
+.m7-profile h2 {color:#ffd45b;letter-spacing:2px}
+.m7-profile input {
+  width:100%;
+  box-sizing:border-box;
+  padding:14px;
+  margin:15px 0;
+  background:#111;
+  color:white;
+  border:1px solid #d6a52b;
+  border-radius:9px;
+}
+.m7-profile button {
+  width:100%;
+  padding:14px;
+  background:linear-gradient(90deg,#a90020,#e1ad32);
+  color:white;
+  border:0;
+  border-radius:9px;
+  font-weight:bold;
+}
+#m7ProfileStatus {color:#ffd45b;margin-top:15px}
+</style>
+
+<section class="m7-profile">
+  <h2>👑 PLAYER PROFILE</h2>
+  <p>CREATE YOUR ROYAL ID</p>
+  <input id="m7Username" maxlength="20"
+    placeholder="Choose username (3–20 characters)">
+  <button id="m7SaveProfile">SAVE PROFILE</button>
+  <p id="m7PlayerId">Player ID: Loading...</p>
+  <p id="m7ProfileStatus">Please login first.</p>
+</section>
+
+<script>
+(() => {
+  const username = document.getElementById("m7Username");
+  const save = document.getElementById("m7SaveProfile");
+  const playerId = document.getElementById("m7PlayerId");
+  const status = document.getElementById("m7ProfileStatus");
+
+  window.m7Auth.onAuthStateChanged(async user => {
+    if (!user) {
+      status.textContent = "Please login first.";
+      playerId.textContent = "Player ID: Not available";
+      save.disabled = true;
+      return;
+    }
+
+    save.disabled = false;
+    playerId.textContent = "Player ID: " + user.uid;
+
+    const profileRef = window.m7Database
+      .ref("players/" + user.uid + "/profile");
+
+    try {
+      const snapshot = await profileRef.once("value");
+      if (snapshot.exists()) {
+        username.value = snapshot.val().username || "";
+        status.textContent = "Profile loaded successfully!";
+      } else {
+        status.textContent = "Choose your username.";
+      }
+    } catch (error) {
+      status.textContent = "Load error: " + error.message;
+    }
+  });
+
+  save.onclick = async () => {
+    const user = window.m7Auth.currentUser;
+    const name = username.value.trim();
+
+    if (!user) {
+      status.textContent = "Please login first.";
+      return;
+    }
+
+    if (name.length < 3 || name.length > 20) {
+      status.textContent = "Username must be 3–20 characters.";
+      return;
+    }
+
+    try {
+      await window.m7Database
+        .ref("players/" + user.uid + "/profile")
+        .set({
+          username: name,
+          playerId: user.uid
+        });
+
+      status.textContent = "Profile saved successfully!";
+    } catch (error) {
+      status.textContent = "Save error: " + error.message;
+    }
+  };
+})();
+</script>
+<!-- END PLAYER PROFILE -->
+ 
 </body>
  </html>
  
