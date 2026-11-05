@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>MAJESTIC7 | Royal Card Games</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#080808;color:#f5e6bd;
+ font-family:Arial,sans-serif;
+}
+header{
+ background:linear-gradient(110deg,#090909,#29200d,#080808);
+ border-bottom:1px solid #b18a39;
+ padding:20px;text-align:center;
+}
+.logo{
+ font-size:34px;font-weight:1000;letter-spacing:4px;
+ color:#e9c66e;text-shadow:0 0 18px #a77c24;
+}
+header p{font-size:11px;letter-spacing:3px;color:#bda36b}
+nav{
+ display:flex;justify-content:center;gap:10px;
+ padding:12px;flex-wrap:wrap;background:#111;
+}
+button{
+ cursor:pointer;border:1px solid #b38c42;
+ background:linear-gradient(135deg,#33260c,#17120a);
+ color:#f6d78b;padding:12px 16px;
+ border-radius:9px;font-weight:bold;
+}
+button:hover{background:#785719;color:white}
+button:disabled{opacity:.4;cursor:not-allowed}
+main{max-width:1100px;margin:auto;padding:18px}
+.hero{
+ text-align:center;padding:30px 10px;
+ background:radial-gradient(ellipse,#382a0e,#100e09 65%,#080808);
+ border:1px solid #72551f;border-radius:18px;
+ margin-bottom:22px;
+}
+.hero h1{font-size:30px;color:#f1cc71}
+.hero p{color:#c5b17d}
+.section-title{color:#e6bd60;margin:24px 0 15px}
+.games{
+ display:grid;grid-template-columns:repeat(4,1fr);gap:13px;
+}
+.game{
+ background:linear-gradient(145deg,#201a0d,#101010);
+ border:1px solid #71551e;border-radius:13px;
+ padding:18px 8px;text-align:center;cursor:pointer;
+ transition:.2s;
+}
+.game:hover{transform:translateY(-4px);border-color:#f1d17b}
+.suit{font-size:34px;color:#e6bf68}
+.game h3{font-size:14px;margin:10px 0;color:#f2d68f}
+.game small{color:#b7a171}
+#table{
+ display:none;background:radial-gradient(ellipse,#185b3b,#073020);
+ border:5px solid #b58c39;border-radius:24px;
+ padding:18px;margin-top:20px;text-align:center;
+ min-height:350px;box-shadow:0 0 30px #000;
+}
+#table h2{color:#f5d787}
+.info{color:#f3e4b6;font-size:13px}
+.hand{
+ display:flex;flex-wrap:wrap;justify-content:center;
+ gap:7px;margin:22px auto;min-height:95px;
+}
+.card{
+ background:#fff;color:#171717;border-radius:8px;
+ width:49px;height:70px;display:flex;
+ flex-direction:column;justify-content:space-between;
+ padding:5px;font-size:17px;font-weight:bold;
+ box-shadow:0 3px 8px #0007;
+}
+.red{color:#d32232}
+.card small{font-size:12px}
+.actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.panel{
+ background:#17140d;border:1px solid #70551f;
+ border-radius:12px;padding:16px;margin-top:20px;
+}
+footer{text-align:center;padding:30px;color:#88774f;font-size:12px}
+@media(max-width:650px){
+ .games{grid-template-columns:repeat(2,1fr)}
+ .logo{font-size:27px}
+ main{padding:12px}
+ .card{width:41px;height:62px;font-size:14px}
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">♛ MAJESTIC7</div>
+ <p>THE ROYAL CARD GAMING EXPERIENCE</p>
+</header>
+<nav>
+ <button onclick="showHome()">HOME</button>
+ <button onclick="showGames()">GAMES</button>
+ <button onclick="showTable()">CARD TABLE</button>
+</nav>
+<main>
+ <section class="hero" id="hero">
+  <h1>WELCOME TO MAJESTIC7</h1>
+  <p>Eight legendary card games. One royal destination.</p>
+  <button onclick="showGames()">EXPLORE GAMES ♛</button>
+ </section>
+
+ <h2 class="section-title" id="gamesTitle">♠ CHOOSE YOUR GAME</h2>
+ <section class="games" id="games"></section>
+
+ <section id="table">
+  <h2 id="gameName">CARD TABLE</h2>
+  <p class="info" id="gameRules"></p>
+  <p class="info" id="status">Ready to play</p>
+  <div class="hand" id="hand"></div>
+  <div class="actions">
+   <button onclick="newGame()">NEW GAME</button>
+   <button onclick="drawCard()">DRAW CARD</button>
+   <button onclick="discardCard()">DISCARD LAST</button>
+  </div>
+  <div class="panel">
+   <p>VIRTUAL CHIPS</p>
+   <h2 id="chips">10000</h2>
+   <p class="info">Free-play demonstration only</p>
+  </div>
+  <button onclick="showGames()">BACK TO GAMES</button>
+ </section>
+
+ <section class="panel">
+  <h2 class="section-title">MAJESTIC7 FEATURES</h2>
+  <p>♛ Eight card game modes</p>
+  <p>♛ Mobile and desktop responsive</p>
+  <p>♛ Virtual chips and card dealing</p>
+  <p>♛ Premium black and gold design</p>
+  <p>♛ No deposits or cash wagering</p>
+ </section>
+</main>
+<footer>
+ MAJESTIC7 © 2026 | ROYAL CARD EXPERIENCE
+ <br><br>Free-play prototype. No real-money gaming.
+</footer>
+
+<script>
+const gameList=[
+ {name:"Indian 13-Card Rummy",count:13,
+  rules:"Arrange 13 cards into valid sequences and sets."},
+ {name:"Points Rummy",count:13,
+  rules:"Quick rummy round with points-based scoring."},
+ {name:"Pool 101",count:13,
+  rules:"Practice pool rummy with a 101-point target."},
+ {name:"Pool 201",count:13,
+  rules:"Practice pool rummy with a 201-point target."},
+ {name:"Deals Rummy",count:13,
+  rules:"Practice deal-based rummy rounds."},
+ {name:"Teen Patti",count:3,
+  rules:"Three-card hand. Practice ranking your cards."},
+ {name:"29 Card Game",count:8,
+  rules:"Four-player trick-taking card game practice."},
+ {name:"Poker",count:5,
+  rules:"Five-card poker hand practice."}
+];
+
+const suits=["♠","♥","♦","♣"];
+const ranks=["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+let deck=[],hand=[],chips=10000,current=null;
+
+const games=document.getElementById("games");
+
+gameList.forEach((g,i)=>{
+ let div=document.createElement("div");
+ div.className="game";
+ div.innerHTML=`
+ <div class="suit">${suits[i%4]}</div>
+ <h3>${g.name}</h3>
+ <small>FREE PLAY • PLAY NOW</small>`;
+ div.onclick=()=>startGame(i);
+ games.appendChild(div);
+});
+
+function buildDeck(){
+ deck=[];
+ suits.forEach(s=>ranks.forEach((r,i)=>{
+  deck.push({rank:r,suit:s,value:i+1});
+ }));
+ for(let i=deck.length-1;i>0;i--){
+  let j=Math.floor(Math.random()*(i+1));
+  [deck[i],deck[j]]=[deck[j],deck[i]];
+ }
+}
+
+function showCards(){
+ const area=document.getElementById("hand");
+ area.innerHTML="";
+ hand.forEach((c,i)=>{
+  let card=document.createElement("div");
+  card.className="card "+("♥♦".includes(c.suit)?"red":"");
+  card.innerHTML=`<small>${c.rank}</small><span>${c.suit}</span><small>${c.rank}</small>`;
+  card.title="Card "+(i+1);
+  area.appendChild(card);
+ });
+}
+
+function startGame(i){
+ current=gameList[i];
+ document.getElementById("hero").style.display="none";
+ document.getElementById("gamesTitle").style.display="none";
+ games.style.display="none";
+ document.getElementById("table").style.display="block";
+ document.getElementById("gameName").textContent=current.name;
+ document.getElementById("gameRules").textContent=current.rules;
+ newGame();
+}
+
+function newGame(){
+ if(!current)return;
+ buildDeck();
+ hand=deck.splice(0,current.count);
+ showCards();
+ document.getElementById("status").textContent=
+ "New "+current.name+" hand dealt!";
+ updateChips();
+}
+
+function drawCard(){
+ if(!current)return;
+ if(deck.length===0){
+  document.getElementById("status").textContent=
+   "Deck empty. Start a new game.";
+  return;
+ }
+ hand.push(deck.pop());
+ showCards();
+ document.getElementById("status").textContent=
+ "Card drawn! Your hand has "+hand.length+" cards.";
+}
+
+function discardCard(){
+ if(!hand.length)return;
+ hand.pop();
+ showCards();
+ document.getElementById("status").textContent=
+ "Last card discarded.";
+}
+
+function updateChips(){
+ document.getElementById("chips").textContent=
+ chips.toLocaleString("en-IN");
+}
+
+function showGames(){
+ document.getElementById("table").style.display="none";
+ document.getElementById("hero").style.display="block";
+ document.getElementById("gamesTitle").style.display="block";
+ games.style.display="grid";
+}
+
+function showHome(){
+ showGames();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function showTable(){
+ if(current){
+  document.getElementById("hero").style.display="none";
+  document.getElementById("gamesTitle").style.display="none";
+  games.style.display="none";
+  document.getElementById("table").style.display="block";
+ }
+}
+</script>
+</body>
+</html>
