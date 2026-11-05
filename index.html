@@ -326,6 +326,320 @@ function renderHand(){
 }
 function setStatus(s){document.getElementById("status").textContent=s}
 </script>
+let deck = [];
+let hand = [];
+let discard = [];
+let selected = -1;
+let currentGame = "Indian 13-Card Rummy";
+let room = "";
+
+const suits = ["♠","♥","♦","♣"];
+const ranks = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+
+function setStatus(message) {
+  document.getElementById("status").textContent = message;
+}
+
+function buildDeck() {
+  deck = [];
+
+  suits.forEach(suit => {
+    ranks.forEach((rank, index) => {
+      deck.push({
+        r: rank,
+        s: suit,
+        v: index + 1,
+        joker: false
+      });
+    });
+  });
+
+  deck.push({r:"★",s:"JOKER",v:0,joker:true});
+  deck.push({r:"★",s:"JOKER",v:0,joker:true});
+
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [deck[i],deck[j]] = [deck[j],deck[i]];
+  }
+}
+
+function startGame(name) {
+  currentGame = name;
+  document.getElementById("gameName").textContent =
+    name.toUpperCase();
+  document.getElementById("play").classList.remove("hidden");
+  document.getElementById("play").scrollIntoView({
+    behavior:"smooth"
+  });
+  setStatus("Welcome! Deal your cards to begin.");
+}
+
+function dealCards() {
+  buildDeck();
+  hand = [];
+  discard = [];
+  selected = -1;
+
+  for (let i = 0; i < 13; i++) {
+    hand.push(deck.pop());
+  }
+
+  discard.push(deck.pop());
+
+  renderHand();
+  updatePiles();
+  setStatus("13 cards dealt. Draw one card.");
+}
+
+function drawCard() {
+  if (hand.length !== 13) {
+    setStatus("Discard a card before drawing again.");
+    return;
+  }
+
+  if (!deck.length) {
+    setStatus("Deck empty. Start a new deal.");
+    return;
+  }
+
+  hand.push(deck.pop());
+  selected = -1;
+  renderHand();
+  setStatus("Card drawn. Select one card to discard.");
+}
+
+function discardCard() {
+  if (hand.length !== 14) {
+    setStatus("Draw a card before discarding.");
+    return;
+  }
+
+  if (selected < 0) {
+    setStatus("Select a card first.");
+    return;
+  }
+
+  discard.push(hand.splice(selected,1)[0]);
+  selected = -1;
+  renderHand();
+  updatePiles();
+  setStatus("Card discarded. Your turn is complete.");
+}
+
+function updatePiles() {
+  const d = discard[discard.length - 1];
+  document.getElementById("discardPile").textContent =
+    d ? d.r + (d.joker ? "" : d.s) : "🂠";
+  document.getElementById("drawPile").textContent =
+    deck.length ? "🂠" : "—";
+}
+
+function renderHand() {
+  const el = document.getElementById("hand");
+  el.innerHTML = "";
+
+  hand.forEach((card,index) => {
+    const node = document.createElement("div");
+
+    node.className =
+      "card " +
+      (["♥","♦"].includes(card.s) ? "red " : "") +
+      (selected === index ? "selected" : "");
+
+    node.innerHTML = card.joker
+      ? "<span>★</span><span style='text-align:center'>JOKER</span><span>★</span>"
+      : `<span>${card.r}</span>
+         <span style="font-size:22px;text-align:center">${card.s}</span>
+         <span style="text-align:right">${card.r}</span>`;
+
+    node.onclick = () => {
+      selected = selected === index ? -1 : index;
+      renderHand();
+    };
+
+    el.appendChild(node);
+  });
+}
+
+function sortHand() {
+  hand.sort((a,b) => {
+    if (a.joker) return 1;
+    if (b.joker) return -1;
+    return suits.indexOf(a.s) - suits.indexOf(b.s) ||
+           a.v - b.v;
+  });
+
+  selected = -1;
+  renderHand();
+  setStatus("Cards sorted by suit and rank.");
+}
+
+// Rummy group detection
+
+function isRun(group) {
+  if (group.length < 3 || group.length > 4) return false;
+
+  const natural = group.filter(c => !c.joker);
+  const wild = group.length - natural.length;
+
+  if (!natural.length) return false;
+
+  if (natural.some(c => c.joker)) return false;
+
+  const suit = natural[0].s;
+  if (natural.some(c => c.s !== suit)) return false;
+
+  const values = natural.map(c => c.v).sort((a,b)=>a-b);
+
+  if (new Set(values).size !== values.length) return false;
+
+  let gaps = 0;
+
+  for (let i = 1; i < values.length; i++) {
+    gaps += values[i] - values[i-1] - 1;
+  }
+
+  return gaps <= wild;
+}
+
+function isSet(group) {
+  if (group.length < 3 || group.length > 4) return false;
+
+  const natural = group.filter(c => !c.joker);
+  const wild = group.length - natural.length;
+
+  if (!natural.length) return false;
+
+  const value = natural[0].v;
+
+  if (natural.some(c => c.v !== value)) return false;
+
+  if (new Set(natural.map(c=>c.s)).size !== natural.length)
+    return false;
+
+  return true;
+}
+
+function getGroups(cards) {
+  const groups = [];
+
+  for (let size = 3; size <= 4; size++) {
+    function combine(start, chosen) {
+      if (chosen.length === size) {
+        const run = isRun(chosen);
+        const set = isSet(chosen);
+
+        if (run || set) {
+          groups.push({
+            indexes: chosen.map(c=>cards.indexOf(c)),
+            run,
+            pure: run && chosen.every(c=>!c.joker)
+          });
+        }
+        return;
+      }
+
+      for (let i = start; i < cards.length; i++) {
+        combine(i+1,[...chosen,cards[i]]);
+      }
+    }
+
+    combine(0,[]);
+  }
+
+  return groups;
+}
+
+function validateRummy() {
+  if (hand.length !== 13) {
+    setStatus("A Rummy declaration requires exactly 13 cards.");
+    return;
+  }
+
+  const groups = getGroups(hand);
+
+  function search(remaining, usedGroups, pureCount, runCount) {
+    if (remaining.length === 0) {
+      return pureCount >= 1 && runCount >= 2;
+    }
+
+    const first = remaining[0];
+
+    for (const group of groups) {
+      if (!group.indexes.includes(first)) continue;
+
+      if (!group.indexes.every(i=>remaining.includes(i))) continue;
+
+      const next = remaining.filter(i=>!group.indexes.includes(i));
+
+      if (search(
+        next,
+        usedGroups + 1,
+        pureCount + (group.pure ? 1 : 0),
+        runCount + (group.run ? 1 : 0)
+      )) return true;
+    }
+
+    return false;
+  }
+
+  const valid = search(
+    hand.map((_,i)=>i),
+    0,0,0
+  );
+
+  if (valid) {
+    setStatus("VALID HAND! Pure sequence and required sequences found.");
+  } else {
+    setStatus("Not a valid declaration yet. Arrange your sequences and sets.");
+  }
+}
+
+function createRoom() {
+  room = Math.random().toString(36).substring(2,8).toUpperCase();
+
+  document.getElementById("roomInfo").classList.remove("hidden");
+  document.getElementById("joinBox").classList.add("hidden");
+  document.getElementById("roomCode").textContent = room;
+  document.getElementById("roomMessage").textContent =
+    "Local demo room created.";
+}
+
+function showJoin() {
+  document.getElementById("joinBox").classList.remove("hidden");
+}
+
+function joinRoom() {
+  const code = document.getElementById("joinCode").value.trim();
+  document.getElementById("roomMessage").textContent =
+    code ? "Invite code entered. Online server connection is not yet configured."
+         : "Enter an invite code.";
+}
+
+function copyCode() {
+  if (room && navigator.clipboard) {
+    navigator.clipboard.writeText(room);
+    document.getElementById("roomMessage").textContent =
+      "Room code copied.";
+  }
+}
+
+// Add advanced controls
+const controls = document.querySelector("#play .table-center");
+
+if (controls && !document.getElementById("advancedControls")) {
+  const box = document.createElement("div");
+  box.id = "advancedControls";
+  box.style.marginTop = "12px";
+
+  box.innerHTML = `
+    <button class="btn dark" onclick="sortHand()">SORT CARDS</button>
+    <button class="btn" onclick="validateRummy()">VALIDATE HAND</button>
+  `;
+
+  controls.appendChild(box);
+}
+        
 </body>
  </html>
  
