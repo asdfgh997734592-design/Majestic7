@@ -379,7 +379,22 @@ function adminAddChips() {
 }
 
 loadPlayer();
-  
+  function startGame(game) {
+  currentGame = game;
+
+  document.getElementById("gameName").textContent = game;
+  document.getElementById("play").classList.remove("hidden");
+
+  document.getElementById("play").scrollIntoView();
+
+  if (document.documentElement.requestFullscreen) {
+    document.documentElement.requestFullscreen().then(() => {
+      if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock("landscape").catch(() => {});
+      }
+    }).catch(() => {});
+  }
+  }
 
 function createDeck() {
   deck = [];
