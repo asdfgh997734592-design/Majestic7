@@ -222,7 +222,9 @@ footer{text-align:center;padding:30px 10px;color:#806e51;font-size:12px}
   <div style="text-align:center;padding:15px">
     <div style="font-size:65px">🤴</div>
     <h2 id="playerName">ROYAL PLAYER</h2>
-    <p style="color:#ffd45a">PLAYER ID: M7-0001</p>
+<p style="color:#ffd45a">
+  PLAYER ID: <span id="playerId">M7-0001</span>
+</p>
   </div>
 
   <input id="username" maxlength="20"
@@ -320,7 +322,8 @@ if (!localStorage.getItem("m7_player_id")) {
     document.getElementById("playerName").textContent =
       savedUsername.toUpperCase();
   }
-}
+}document.getElementById("playerId").textContent =
+      localStorage.getItem("m7_player_id") || "M7-0001";
 
 loadPlayer();
 function startGame(name) {
