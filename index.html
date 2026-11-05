@@ -250,7 +250,36 @@ footer{text-align:center;padding:30px 10px;color:#806e51;font-size:12px}
   <a href="#play">PLAY</a>
  </nav>
 </header>
+<!-- TEEN PATTI GOLD -->
+<section class="panel hidden" id="teenPatti">
+  <h2>👑 TEEN PATTI GOLD</h2>
+  <p style="color:#ffd45a">ROYAL SIX PLAYER TABLE</p>
 
+  <div id="tpTable" style="background:#07502e;border:4px solid gold;border-radius:25px;padding:15px;text-align:center">
+
+    <div class="seats">
+      <div class="seat">🤴<small>ROYAL BOT 1</small></div>
+      <div class="seat">👸<small>ROYAL BOT 2</small></div>
+      <div class="seat">🦁<small>ROYAL BOT 3</small></div>
+      <div class="seat">🐯<small>ROYAL BOT 4</small></div>
+      <div class="seat">🛡️<small>ROYAL BOT 5</small></div>
+      <div class="seat">👑<small>YOU</small></div>
+    </div>
+
+    <h3 style="color:#ffe08a">YOUR THREE CARDS</h3>
+    <div id="tpCards" style="font-size:35px;padding:15px">
+      🂠 🂠 🂠
+    </div>
+
+    <p style="color:white">Virtual Chips: <b id="tpBalance">0</b></p>
+    <p id="tpStatus" style="color:#ffe08a">Press DEAL to start.</p>
+
+    <button class="btn" onclick="teenDeal()">DEAL</button>
+    <button class="btn dark" onclick="teenPack()">PACK</button>
+    <button class="btn red" onclick="teenShow()">SHOW</button>
+  </div>
+</section>
+<!-- END TEEN PATTI GOLD -->
 <main>
 <section class="hero" id="home">
  <div class="eyebrow">THE ROYAL GAMING UNIVERSE</div>
