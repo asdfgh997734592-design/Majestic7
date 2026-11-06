@@ -1,1 +1,387 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100707">
+<title>MAJESTIC7 | Royal Gaming Lounge</title>
+<style>
+:root{
+  --bg:#100707;--panel:#1b0d0d;--panel2:#261111;
+  --gold:#f4c96b;--gold2:#ffe7a6;--red:#a71927;
+  --text:#fff8e9;--muted:#b9a9a0;--line:#49302a;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:
+  radial-gradient(ellipse at 50% -20%,#5b171b 0%,transparent 50%),
+  var(--bg);color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  padding-bottom:85px;
+}
+button{font:inherit;cursor:pointer}
+header{
+  position:sticky;top:0;z-index:20;
+  background:#120909ed;backdrop-filter:blur(15px);
+  border-bottom:1px solid #6c482c;
+  padding:12px 4%;
+}
+.top{max-width:1250px;margin:auto;display:flex;
+align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{
+  width:44px;height:44px;border-radius:13px;
+  display:grid;place-items:center;
+  color:#210c08;font-size:23px;font-weight:1000;
+  background:linear-gradient(145deg,#fff0b5,#d89a32,#fff0a4);
+  box-shadow:0 0 20px #d69c3b55;
+}
+.brand-name{font-family:Georgia,serif;font-weight:bold;
+font-size:21px;letter-spacing:2px;color:var(--gold2)}
+.brand-sub{font-size:9px;letter-spacing:3px;color:#c5a77d}
+.top-actions{display:flex;align-items:center;gap:9px}
+.chip-pill,.profile-btn{
+  border:1px solid #8b672f;border-radius:30px;
+  background:#281710;color:var(--gold2);
+  padding:10px 13px;font-weight:bold;font-size:12px;
+}
+.profile-btn{background:linear-gradient(135deg,#f4d17b,#b87826);
+color:#291207;border:0}
+main{max-width:1250px;margin:auto;padding:20px 4%}
+.hero{
+  position:relative;overflow:hidden;border:1px solid #9a692d;
+  border-radius:22px;min-height:210px;padding:28px;
+  background:
+  radial-gradient(circle at 80% 30%,#f1b94b55,transparent 28%),
+  linear-gradient(115deg,#481017,#1a0b0b 58%,#5b2410);
+  box-shadow:0 14px 40px #0008;
+}
+.hero:after{
+  content:"♠  ♥  ♦  ♣";position:absolute;right:3%;bottom:-12px;
+  font-size:clamp(45px,9vw,100px);letter-spacing:10px;
+  color:#f3c96b19;white-space:nowrap;
+}
+.hero-content{position:relative;z-index:1;max-width:600px}
+.eyebrow{color:var(--gold);font-size:11px;letter-spacing:4px;font-weight:bold}
+h1{font-family:Georgia,serif;font-size:clamp(30px,5vw,51px);
+line-height:1.05;margin:12px 0;color:#fff0c4}
+.hero p{color:#e1c9b2;max-width:490px;line-height:1.6;font-size:14px}
+.gold-btn{
+  border:0;border-radius:30px;padding:12px 20px;
+  background:linear-gradient(135deg,#fff0b1,#d89b3c,#ffe5a0);
+  color:#301609;font-weight:900;box-shadow:0 5px 18px #d99b3b33;
+}
+.section-head{display:flex;align-items:center;justify-content:space-between;
+margin:27px 0 13px;gap:12px}
+.section-head h2{font-family:Georgia,serif;color:var(--gold2);
+font-size:21px;margin:0}
+.section-head span{font-size:11px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:17px}
+.stat{padding:13px;background:#1c1010;border:1px solid var(--line);
+border-radius:14px}
+.stat strong{display:block;color:var(--gold);font-size:18px}
+.stat small{color:var(--muted);font-size:10px}
+.games{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;
+}
+.game-card{
+  overflow:hidden;border:1px solid #54382c;border-radius:17px;
+  background:linear-gradient(145deg,#291414,#170c0c);
+  transition:.2s;min-width:0;
+}
+.game-card:hover{transform:translateY(-3px);border-color:var(--gold)}
+.game-art{
+  aspect-ratio:16/9;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 50% 45%,#a52b2c,#3a0b13 65%,#150809);
+}
+.game-art:before{
+  content:"";position:absolute;inset:9%;border:1px solid #f7d27b55;
+  border-radius:50%;box-shadow:0 0 35px #f4c96b22,inset 0 0 35px #f4c96b22;
+}
+.game-art:after{content:"";position:absolute;inset:0;
+background:linear-gradient(120deg,transparent 25%,#ffffff12 48%,transparent 65%)}
+.art-icon{position:relative;z-index:1;font-size:clamp(42px,8vw,78px);
+filter:drop-shadow(0 7px 10px #0009)}
+.art-label{position:absolute;bottom:12px;left:14px;z-index:2;
+font-family:Georgia,serif;font-weight:bold;font-size:clamp(14px,2.4vw,21px);
+color:#ffe6a4;text-shadow:0 2px 6px #000}
+.art-2{background:radial-gradient(circle,#b57c2c,#44200e 65%,#130908)}
+.art-3{background:radial-gradient(circle,#276b4b,#0c241b 65%,#080f0b)}
+.art-4{background:radial-gradient(circle,#285b85,#101c38 65%,#080b18)}
+.art-5{background:radial-gradient(circle,#793b91,#28102f 65%,#100813)}
+.art-6{background:radial-gradient(circle,#a05b27,#3b190d 65%,#130906)}
+.game-info{padding:13px}
+.game-info h3{margin:0 0 5px;color:#ffe7b0;font-family:Georgia,serif;font-size:17px}
+.game-info p{margin:0 0 12px;color:var(--muted);font-size:11px}
+.play-btn{width:100%;padding:10px;border-radius:9px;border:1px solid #b7863f;
+background:linear-gradient(120deg,#f5d27f,#bd792b);color:#291308;
+font-weight:900;font-size:12px}
+.notice{
+  border:1px solid #5d4429;background:#20140f;border-radius:13px;
+  padding:14px;margin-top:22px;color:#d8c4a8;font-size:12px;line-height:1.6;
+}
+.notice strong{color:var(--gold)}
+footer{text-align:center;color:#8d7a6e;font-size:10px;padding:25px 10px}
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:25;
+  display:flex;justify-content:space-around;align-items:center;
+  padding:10px 5px calc(10px + env(safe-area-inset-bottom));
+  background:#160b0bf5;border-top:1px solid #63452c;
+  backdrop-filter:blur(14px)
+}
+.nav-btn{border:0;background:none;color:#bba99a;font-size:10px;
+display:flex;flex-direction:column;align-items:center;gap:4px;min-width:55px}
+.nav-btn b{font-size:19px;font-weight:normal}
+.nav-btn.active{color:var(--gold2)}
+.modal{
+  display:none;position:fixed;inset:0;z-index:50;
+  background:#000c;align-items:center;justify-content:center;padding:15px;
+}
+.modal.show{display:flex}
+.modal-box{
+  width:min(560px,100%);max-height:90vh;overflow:auto;
+  background:linear-gradient(145deg,#2b1412,#130909);
+  border:1px solid #a87939;border-radius:19px;padding:19px;
+  box-shadow:0 20px 70px #000b;
+}
+.modal-top{display:flex;justify-content:space-between;align-items:center}
+.modal-top h2{color:var(--gold2);font-family:Georgia,serif}
+.close{background:#40201b;color:white;border:1px solid #805337;
+border-radius:50%;width:34px;height:34px}
+.table{
+  min-height:270px;margin:15px 0;padding:20px;
+  border:9px solid #75451f;border-radius:48%;
+  background:radial-gradient(ellipse,#176443,#0a3828 72%,#09251c);
+  display:flex;flex-direction:column;justify-content:space-between;
+  align-items:center;box-shadow:inset 0 0 30px #0008;
+}
+.seats{display:flex;justify-content:space-around;width:100%;gap:5px}
+.seat{font-size:10px;text-align:center;color:#ffe7b0}
+.avatar{width:37px;height:37px;border-radius:50%;margin:auto auto 4px;
+display:grid;place-items:center;background:#8e4e24;border:2px solid #e7bf67}
+.playing-cards{display:flex;gap:7px;justify-content:center;margin:9px}
+.playing-cards span{background:#fff8e9;color:#21130d;border-radius:6px;
+padding:12px 9px;font-weight:bold;font-size:19px;box-shadow:0 3px 8px #0008}
+.table-controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.table-controls button{flex:1;min-width:100px}
+.secondary{background:#321b17;border:1px solid #886039;color:#f6d58b;
+border-radius:9px;padding:11px;font-weight:bold}
+input{width:100%;padding:13px;border-radius:9px;border:1px solid #725036;
+background:#120a0a;color:white;margin:7px 0 14px}
+.profile-card{background:#241310;padding:15px;border-radius:12px;
+border:1px solid #67462e;margin:12px 0}
+@media(min-width:800px){
+ .games{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .hero{padding:40px}
+}
+@media(max-width:390px){
+ header{padding:10px 3%}.brand-name{font-size:17px}
+ .chip-pill{padding:9px;font-size:10px}
+ main{padding:15px 3%}.games{gap:10px}
+ .game-info{padding:10px}.game-info h3{font-size:15px}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="top">
+  <div class="brand">
+   <div class="logo">M7</div>
+   <div>
+    <div class="brand-name">MAJESTIC7</div>
+    <div class="brand-sub">THE ROYAL LOUNGE</div>
+   </div>
+  </div>
+  <div class="top-actions">
+   <button class="chip-pill" onclick="showChips()">🪙 <span id="balance">10,000</span></button>
+   <button class="profile-btn" onclick="openProfile()">PROFILE</button>
+  </div>
+ </div>
+</header>
+
+<main>
+ <section class="hero">
+  <div class="hero-content">
+   <div class="eyebrow">WELCOME TO THE ROYAL LOUNGE</div>
+   <h1>PLAY LIKE<br>ROYALTY.</h1>
+   <p>Enter the Majestic7 virtual game lounge. Choose a game, invite your friends and enjoy the experience.</p>
+   <button class="gold-btn" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">EXPLORE GAMES →</button>
+   <div class="stats">
+    <div class="stat"><strong>06</strong><small>GAME ROOMS</small></div>
+    <div class="stat"><strong>6</strong><small>TABLE SEATS</small></div>
+    <div class="stat"><strong>FREE</strong><small>DEMO CHIPS</small></div>
+   </div>
+  </div>
+ </section>
+
+ <div class="section-head" id="games">
+  <h2>♛ The Royal Games</h2><span>CHOOSE YOUR GAME</span>
+ </div>
+
+ <section class="games">
+  <article class="game-card">
+   <div class="game-art"><div class="art-icon">🂡</div><div class="art-label">TEEN PATTI</div></div>
+   <div class="game-info"><h3>Teen Patti</h3><p>Classic three-card table experience</p><button class="play-btn" onclick="openGame('Teen Patti')">ENTER TABLE</button></div>
+  </article>
+  <article class="game-card">
+   <div class="game-art art-2"><div class="art-icon">👑</div><div class="art-label">PRIVATE TABLE</div></div>
+   <div class="game-info"><h3>Private Table</h3><p>Create a room for your friends</p><button class="play-btn" onclick="openGame('Private Table')">CREATE ROOM</button></div>
+  </article>
+  <article class="game-card">
+   <div class="game-art art-3"><div class="art-icon">🃏</div><div class="art-label">ANDAR BAHAR</div></div>
+   <div class="game-info"><h3>Andar Bahar</h3><p>A classic Indian card game demo</p><button class="play-btn" onclick="openGame('Andar Bahar')">PLAY DEMO</button></div>
+  </article>
+  <article class="game-card">
+   <div class="game-art art-4"><div class="art-icon">🐉</div><div class="art-label">DRAGON TIGER</div></div>
+   <div class="game-info"><h3>Dragon Tiger</h3><p>Two-side card comparison demo</p><button class="play-btn" onclick="openGame('Dragon Tiger')">PLAY DEMO</button></div>
+  </article>
+  <article class="game-card">
+   <div class="game-art art-5"><div class="art-icon">✨</div><div class="art-label">LUCKY 7</div></div>
+   <div class="game-info"><h3>Lucky 7</h3><p>Simple number game interface</p><button class="play-btn" onclick="openGame('Lucky 7')">PLAY DEMO</button></div>
+  </article>
+  <article class="game-card">
+   <div class="game-art art-6"><div class="art-icon">🤝</div><div class="art-label">FRIENDS ROOM</div></div>
+   <div class="game-info"><h3>Friends Room</h3><p>Invite friends to a demo table</p><button class="play-btn" onclick="openGame('Friends Room')">OPEN ROOM</button></div>
+  </article>
+ </section>
+
+ <section class="notice">
+  <strong>DEMO MODE ONLY</strong><br>
+  MAJESTIC7 currently uses virtual demonstration chips with no cash value.
+  No deposits, withdrawals, cash prizes or real-money wagering are supported.
+  Multiplayer, real-time chat, secure accounts and admin chip approvals are not
+  connected in this static demo and require a secure backend before launch.
+ </section>
+</main>
+
+<footer>MAJESTIC7 · THE ROYAL LOUNGE<br>Virtual entertainment demo · No real-money gaming</footer>
+
+<nav class="bottom-nav">
+ <button class="nav-btn active" onclick="goHome(this)"><b>⌂</b>Home</button>
+ <button class="nav-btn" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})"><b>♠</b>Games</button>
+ <button class="nav-btn" onclick="openGame('Private Table')"><b>♛</b>Rooms</button>
+ <button class="nav-btn" onclick="openProfile()"><b>♙</b>Profile</button>
+ <button class="nav-btn" onclick="contactAdmin()"><b>☏</b>Support</button>
+</nav>
+
+<div class="modal" id="gameModal" onclick="outsideClose(event,'gameModal')">
+ <div class="modal-box">
+  <div class="modal-top"><h2 id="gameTitle">Game Table</h2><button class="close" onclick="closeModal('gameModal')">×</button></div>
+  <div class="table">
+   <div class="seats">
+    <div class="seat"><div class="avatar">👤</div>Player 2</div>
+    <div class="seat"><div class="avatar">👤</div>Player 3</div>
+    <div class="seat"><div class="avatar">👤</div>Player 4</div>
+   </div>
+   <div style="text-align:center">
+    <div style="color:#ffe6a2;font-family:Georgia,serif">MAJESTIC7 TABLE</div>
+    <div class="playing-cards" id="cards"><span>?</span><span>?</span><span>?</span></div>
+    <div style="font-size:11px;color:#d9c5a4" id="tableMessage">Demo table · Waiting to start</div>
+   </div>
+   <div class="seats">
+    <div class="seat"><div class="avatar">👤</div>Player 5</div>
+    <div class="seat"><div class="avatar">👤</div>Player 6</div>
+    <div class="seat"><div class="avatar">⭐</div>You</div>
+   </div>
+  </div>
+  <div class="table-controls">
+   <button class="gold-btn" onclick="dealCards()">DEAL DEMO CARDS</button>
+   <button class="secondary" onclick="inviteFriends()">INVITE FRIENDS</button>
+  </div>
+  <p style="font-size:10px;color:#bba99a;text-align:center;line-height:1.5">
+   This is a local visual demo. Other seats are illustrations, not connected players.
+  </p>
+ </div>
+</div>
+
+<div class="modal" id="profileModal" onclick="outsideClose(event,'profileModal')">
+ <div class="modal-box">
+  <div class="modal-top"><h2>Royal Profile</h2><button class="close" onclick="closeModal('profileModal')">×</button></div>
+  <div class="profile-card">
+   <div style="font-size:36px">👑</div>
+   <h3 id="profileName">Royal Guest</h3>
+   <div style="color:#eac878;font-size:13px">Virtual balance: <strong id="profileBalance">10,000</strong> chips</div>
+  </div>
+  <label style="font-size:12px;color:#eac878">DISPLAY NAME</label>
+  <input id="nameInput" maxlength="24" placeholder="Enter your display name">
+  <button class="gold-btn" style="width:100%" onclick="saveProfile()">SAVE DEMO PROFILE</button>
+  <p style="font-size:10px;color:#bba99a">Profile is stored only in this browser. This is not a secure online account.</p>
+ </div>
+</div>
+
+<div class="modal" id="chipsModal" onclick="outsideClose(event,'chipsModal')">
+ <div class="modal-box">
+  <div class="modal-top"><h2>Virtual Chips</h2><button class="close" onclick="closeModal('chipsModal')">×</button></div>
+  <div class="profile-card">
+   <div style="color:#d8b66e;font-size:12px">YOUR DEMO BALANCE</div>
+   <div style="font-size:30px;color:#ffe7a6;font-weight:bold" id="chipModalBalance">10,000</div>
+  </div>
+  <button class="gold-btn" style="width:100%" onclick="claimChips()">CLAIM 1,000 FREE DEMO CHIPS</button>
+  <p style="font-size:11px;color:#bba99a">Virtual chips only. No cash value, transfers, deposits or withdrawals.</p>
+ </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+let balance = Number(localStorage.getItem("m7_balance") || 10000);
+let playerName = localStorage.getItem("m7_name") || "Royal Guest";
+let currentGame = "Teen Patti";
+
+function updateUI(){
+ $("balance").textContent = balance.toLocaleString("en-IN");
+ $("profileBalance").textContent = balance.toLocaleString("en-IN");
+ $("chipModalBalance").textContent = balance.toLocaleString("en-IN");
+ $("profileName").textContent = playerName;
+ localStorage.setItem("m7_balance",String(balance));
+}
+function showModal(id){$(id).classList.add("show")}
+function closeModal(id){$(id).classList.remove("show")}
+function outsideClose(e,id){if(e.target.id===id)closeModal(id)}
+function openGame(name){
+ currentGame=name;
+ $("gameTitle").textContent=name;
+ $("cards").innerHTML="<span>?</span><span>?</span><span>?</span>";
+ $("tableMessage").textContent="Demo table · Waiting to start";
+ showModal("gameModal");
+}
+function dealCards(){
+ const deck=["A♠","K♥","Q♦","J♣","10♠","9♥","8♦","7♣","6♠"];
+ const shuffled=[...deck].sort(()=>Math.random()-.5);
+ $("cards").innerHTML=shuffled.slice(0,3).map(c=>"<span>"+c+"</span>").join("");
+ $("tableMessage").textContent="Demo cards dealt · "+currentGame;
+}
+function inviteFriends(){
+ const msg=encodeURIComponent("Join me in the MAJESTIC7 virtual demo lounge!");
+ window.open("https://wa.me/?text="+msg,"_blank");
+}
+function openProfile(){
+ $("nameInput").value=playerName==="Royal Guest"?"":playerName;
+ showModal("profileModal");
+}
+function saveProfile(){
+ const name=$("nameInput").value.trim();
+ if(name)playerName=name;
+ localStorage.setItem("m7_name",playerName);
+ updateUI();closeModal("profileModal");
+}
+function showChips(){showModal("chipsModal")}
+function claimChips(){
+ balance+=1000;updateUI();
+ $("tableMessage").textContent=""; 
+}
+function contactAdmin(){
+ window.open("https://wa.me/918897458901?text="+encodeURIComponent("Hello MAJESTIC7 Admin, I need support."),"_blank");
+}
+function goHome(btn){
+ window.scrollTo({top:0,behavior:"smooth"});
+ document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
+ btn.classList.add("active");
+}
+updateUI();
+</script>
+</body>
+  </html>
+  
